@@ -1,6 +1,5 @@
 'use client'
 import { useRainBalance } from '@/hooks/use-rain-balance'
-import { StreakCounter } from '@/components/vip/streak-counter'
 import { ReloadClaim } from '@/components/vip/reload-claim'
 import { CashDropCode } from '@/components/vip/cash-drop-code'
 import { BetAndGet } from '@/components/vip/bet-and-get'
@@ -33,6 +32,7 @@ import {
   IconMaximize,
   IconLoader2,
   IconClock,
+  IconCoin,
   IconCoins,
   IconBolt,
   IconStar,
@@ -114,7 +114,6 @@ import {
 } from '@/components/ui/accordion'
 import { UsageBasedPricing } from '@/components/billingsdk/usage-based-pricing'
 import { Input } from '@/components/ui/input'
-import ChatNavToggle from '@/components/chat/chat-nav-toggle'
 import DynamicIsland from '@/components/dynamic-island'
 import { JackpotOverlay } from '@/components/casino/jackpot-overlay'
 
@@ -178,8 +177,7 @@ const squareTileImages = [
   '/games/square/game17.png',
   '/games/square/game18.png',
   '/games/square/game20.png',
-  '/games/square/game21.png',
-]
+  '/games/square/game21.png']
 
 // Originals tile images (tall rectangles)
 const originalsTileImages = [
@@ -192,8 +190,7 @@ const originalsTileImages = [
   '/games/originals/limbo.png',
   '/games/originals/wheel.png',
   '/games/originals/hilo.png',
-  '/games/originals/video_poker.png',
-]
+  '/games/originals/video_poker.png']
 
 // Real vendor names from the carousel (used for random assignment on tiles)
 const tileVendors = [
@@ -201,8 +198,7 @@ const tileVendors = [
   'Blaze', 'DeckFresh', 'Emerald Gate', 'Felix', 'KA Gaming',
   'Lucky', 'Mascot Gaming', 'Nucleus', 'Onlyplay', 'Popiplay',
   'Qora', 'Red Sparrow', 'Revolver Gaming', 'Rival', 'Twain',
-  'VIG', 'Wingo',
-]
+  'VIG', 'Wingo']
 
 // Get a vendor deterministically by index
 function getTileVendor(index: number): string {
@@ -546,7 +542,7 @@ function VipDrawerContent({
     const container = vipTabsContainerRef.current
     if (!container) return
 
-    const tabs = ['VIP Hub', 'Cash Boost', 'Bet & Get', 'Reloads', 'Cash Drop']
+    const tabs = ['VIP Hub', 'Bet & Get', 'Reloads', 'Cash Drop']
     const activeIndex = tabs.indexOf(vipActiveTab)
     
     if (activeIndex === -1) return
@@ -644,7 +640,7 @@ function VipDrawerContent({
               pointerEvents: 'auto'
             }}
           >
-            {['VIP Hub', 'Cash Boost', 'Bet & Get', 'Reloads', 'Cash Drop'].map((tab, index) => (
+            {['VIP Hub', 'Bet & Get', 'Reloads', 'Cash Drop'].map((tab, index) => (
               <button
                 key={tab}
                 onClick={() => setVipActiveTab(tab)}
@@ -686,11 +682,7 @@ function VipDrawerContent({
                 <div className="text-xs text-white/50 mt-2">Updated 24/25/2024, 8:00 PM ET</div>
               </CardContent>
             </Card>
-            
-            <StreakCounter />
 
-
-            
             <div>
               <h3 className="text-lg font-semibold text-white mb-4">My Benefits</h3>
               <Accordion type="single" defaultValue="Gold" collapsible className="w-full">
@@ -797,18 +789,6 @@ function VipDrawerContent({
                           <div className="h-4 w-4 rounded-full bg-white/20 flex items-center justify-center">
                             <IconCheck className="h-3 w-3" />
                           </div>
-                          <span>Weekly Cash Boost</span>
-                        </div>
-                        <div className="flex items-center gap-2 text-sm text-white">
-                          <div className="h-4 w-4 rounded-full bg-white/20 flex items-center justify-center">
-                            <IconCheck className="h-3 w-3" />
-                          </div>
-                          <span>Monthly Cash Boost</span>
-                        </div>
-                        <div className="flex items-center gap-2 text-sm text-white">
-                          <div className="h-4 w-4 rounded-full bg-white/20 flex items-center justify-center">
-                            <IconCheck className="h-3 w-3" />
-                          </div>
                           <span>Level Up Bonuses</span>
                         </div>
                       </div>
@@ -844,18 +824,6 @@ function VipDrawerContent({
                           <div className="h-4 w-4 rounded-full bg-white/20 flex items-center justify-center">
                             <IconCheck className="h-3 w-3" />
                           </div>
-                          <span>Weekly Cash Boost</span>
-                        </div>
-                        <div className="flex items-center gap-2 text-sm text-white">
-                          <div className="h-4 w-4 rounded-full bg-white/20 flex items-center justify-center">
-                            <IconCheck className="h-3 w-3" />
-                          </div>
-                          <span>Monthly Cash Boost</span>
-                        </div>
-                        <div className="flex items-center gap-2 text-sm text-white">
-                          <div className="h-4 w-4 rounded-full bg-white/20 flex items-center justify-center">
-                            <IconCheck className="h-3 w-3" />
-                          </div>
                           <span>Level Up Bonuses</span>
                         </div>
                       </div>
@@ -880,12 +848,6 @@ function VipDrawerContent({
                             <IconCheck className="h-3 w-3" />
                           </div>
                           <span>All Platinum I - III Benefits</span>
-                        </div>
-                        <div className="flex items-center gap-2 text-sm text-white">
-                          <div className="h-4 w-4 rounded-full bg-white/20 flex items-center justify-center">
-                            <IconCheck className="h-3 w-3" />
-                          </div>
-                          <span>Monthly Cash Boost</span>
                         </div>
                         <div className="flex items-center gap-2 text-sm text-white">
                           <div className="h-4 w-4 rounded-full bg-white/20 flex items-center justify-center">
@@ -1052,128 +1014,6 @@ function VipDrawerContent({
                 </AccordionItem>
               </Accordion>
             </div>
-          </div>
-        )}
-        
-        {vipActiveTab === 'Cash Boost' && (
-          <div className="space-y-3">
-            {boostClaimMessage && (
-              <motion.div
-                initial={{ opacity: 0, y: -10 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -10 }}
-                className="bg-green-500/10 border border-green-500/30 rounded-lg p-4 flex items-center gap-3"
-              >
-                <div className="flex-shrink-0">
-                  <div className="w-10 h-10 rounded-full bg-green-500/20 flex items-center justify-center">
-                    <IconCheck className="w-5 h-5 text-green-400" strokeWidth={2} />
-                  </div>
-                </div>
-                <div className="flex-1">
-                  <div className="text-sm font-semibold text-white">
-                    ${boostClaimMessage.amount.toFixed(2)} have been claimed and added to your balance
-                  </div>
-                </div>
-              </motion.div>
-            )}
-            {claimedBoosts.has('weekly') && claimedBoosts.has('monthly') ? (
-              <Card className="bg-white/3 border-white/5">
-                <CardContent className="p-8">
-                  <div className="flex flex-col items-center justify-center">
-                    <div className="w-20 h-20 rounded-2xl bg-white/3 border border-white/5 flex items-center justify-center mb-6">
-                      <IconCrown className="w-10 h-10 text-white/40" strokeWidth={1.5} />
-                    </div>
-                    <div className="text-center space-y-2">
-                      <p className="text-white/70 text-sm leading-relaxed">
-                        Keep on playing and check back for any cash<br />
-                        boost rewards.
-                      </p>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-            ) : (
-              <>
-                {!claimedBoosts.has('weekly') && (
-                  <div className="group flex items-center gap-4 rounded-xl bg-gradient-to-r from-[#fbbf24]/10 to-[#fbbf24]/5 border border-[#fbbf24]/20 p-4 transition-all">
-                    <div className="flex-shrink-0">
-                      <div className="w-12 h-12 rounded-xl bg-[#fbbf24]/20 flex items-center justify-center">
-                        <IconCoins className="w-6 h-6 text-[#fbbf24]" strokeWidth={1.5} />
-                      </div>
-                    </div>
-                    <div className="flex-1 min-w-0">
-                      <div className="text-lg font-bold text-white">$15.00</div>
-                      <div className="text-xs text-white/40">Weekly Cash Boost</div>
-                    </div>
-                    <Button 
-                      variant="ghost"
-                      className="text-white hover:bg-[#ee3536]/90 bg-[#ee3536] text-xs px-4 py-1.5 h-8 rounded-lg font-semibold border-0"
-                      onClick={() => {
-                        setBoostProcessing('weekly')
-                        setTimeout(() => {
-                          setClaimedBoosts(prev => new Set([...prev, 'weekly']))
-                          setBoostProcessing(null)
-                          setBoostClaimMessage({ amount: 15 })
-                          onBoostClaimed(15)
-                          setTimeout(() => {
-                            setBoostClaimMessage(null)
-                          }, 3000)
-                        }, 1500)
-                      }}
-                      disabled={boostProcessing !== null}
-                    >
-                      {boostProcessing === 'weekly' ? (
-                        <div className="flex items-center gap-2">
-                          <IconLoader2 className="w-3 h-3 animate-spin" />
-                          <span>Processing...</span>
-                        </div>
-                      ) : (
-                        'CLAIM'
-                      )}
-                    </Button>
-                  </div>
-                )}
-                {!claimedBoosts.has('monthly') && (
-                  <div className="group flex items-center gap-4 rounded-xl bg-gradient-to-r from-[#fbbf24]/10 to-[#fbbf24]/5 border border-[#fbbf24]/20 p-4 transition-all">
-                    <div className="flex-shrink-0">
-                      <div className="w-12 h-12 rounded-xl bg-[#fbbf24]/20 flex items-center justify-center">
-                        <IconCoins className="w-6 h-6 text-[#fbbf24]" strokeWidth={1.5} />
-                      </div>
-                    </div>
-                    <div className="flex-1 min-w-0">
-                      <div className="text-lg font-bold text-white">$20.00</div>
-                      <div className="text-xs text-white/40">Monthly Cash Boost</div>
-                    </div>
-                    <Button 
-                      variant="ghost"
-                      className="text-white hover:bg-[#ee3536]/90 bg-[#ee3536] text-xs px-4 py-1.5 h-8 rounded-lg font-semibold border-0"
-                      onClick={() => {
-                        setBoostProcessing('monthly')
-                        setTimeout(() => {
-                          setClaimedBoosts(prev => new Set([...prev, 'monthly']))
-                          setBoostProcessing(null)
-                          setBoostClaimMessage({ amount: 20 })
-                          onBoostClaimed(20)
-                          setTimeout(() => {
-                            setBoostClaimMessage(null)
-                          }, 3000)
-                        }, 1500)
-                      }}
-                      disabled={boostProcessing !== null}
-                    >
-                      {boostProcessing === 'monthly' ? (
-                        <div className="flex items-center gap-2">
-                          <IconLoader2 className="w-3 h-3 animate-spin" />
-                          <span>Processing...</span>
-                        </div>
-                      ) : (
-                        'CLAIM'
-                      )}
-                    </Button>
-                  </div>
-                )}
-              </>
-            )}
           </div>
         )}
         
@@ -1365,8 +1205,7 @@ function HomePageContent() {
     { rank: 7, nickname: 'Hidden', wagered: '$4,503.05', prize: '5%' },
     { rank: 8, nickname: 'Hidden', wagered: '$4,163.80', prize: '3%' },
     { rank: 9, nickname: 'Hidden', wagered: '$3,123.05', prize: '2%' },
-    { rank: 10, nickname: 'Hidden', wagered: '$2,305.07', prize: '1%' },
-  ]
+    { rank: 10, nickname: 'Hidden', wagered: '$2,305.07', prize: '1%' }]
   
   const userRacePosition = {
     rank: 5708,
@@ -1386,8 +1225,7 @@ function HomePageContent() {
     { id: 'jp7', user: 'HighRoller', game: 'Razor Shark', amount: '$15,230.00', time: '2 days ago', gameImage: squareTileImages[5] },
     { id: 'jp8', user: 'Hidden', game: 'Big Bass Bonanza', amount: '$12,800.50', time: '2 days ago', gameImage: squareTileImages[6] },
     { id: 'jp9', user: 'Player1', game: 'Dead or Alive', amount: '$9,500.00', time: '3 days ago', gameImage: squareTileImages[4] },
-    { id: 'jp10', user: 'Hidden', game: 'Mega Moolah', amount: '$8,120.25', time: '3 days ago', gameImage: squareTileImages[3] },
-  ]
+    { id: 'jp10', user: 'Hidden', game: 'Mega Moolah', amount: '$8,120.25', time: '3 days ago', gameImage: squareTileImages[3] }]
 
   // Daily Race countdown timer state
   const [raceHours, setRaceHours] = useState(6)
@@ -1425,8 +1263,7 @@ function HomePageContent() {
       { name: 'Dead or Alive', icon: 'casino' as const, image: squareTileImages[4] },
       { name: 'Razor Shark', icon: 'casino' as const, image: squareTileImages[5] },
       { name: 'Big Bass Bonanza', icon: 'casino' as const, image: squareTileImages[6] },
-      { name: 'Sweet Bonanza', icon: 'casino' as const, image: squareTileImages[7] },
-    ]
+      { name: 'Sweet Bonanza', icon: 'casino' as const, image: squareTileImages[7] }]
     
     const now = new Date()
     const timeStr = now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: true })
@@ -1735,8 +1572,7 @@ function HomePageContent() {
     // MLB
     { id: 12, team1: 'Los Angeles Dodgers', team2: 'San Francisco Giants', score: '5 - 3', team1Code: 'LAD', team2Code: 'SF', team1Percent: 65, team2Percent: 35, time: 'B7', league: 'MLB', leagueIcon: '/banners/sports_league/MLB.svg', country: 'USA', team1Logo: 'https://a.espncdn.com/i/teamlogos/mlb/500/lad.png', team2Logo: 'https://a.espncdn.com/i/teamlogos/mlb/500/sf.png', odds: { team1: '-175', tie: '+900', team2: '+155' } },
     // NFL
-    { id: 13, team1: 'San Francisco 49ers', team2: 'Seattle Seahawks', score: '21 - 14', team1Code: 'SF', team2Code: 'SEA', team1Percent: 68, team2Percent: 32, time: 'Q2 12\'', league: 'NFL', leagueIcon: '/banners/sports_league/NFL.svg', country: 'USA', team1Logo: 'https://a.espncdn.com/i/teamlogos/nfl/500/sf.png', team2Logo: 'https://a.espncdn.com/i/teamlogos/nfl/500/sea.png', odds: { team1: '-150', tie: '+800', team2: '+130' } },
-  ]
+    { id: 13, team1: 'San Francisco 49ers', team2: 'Seattle Seahawks', score: '21 - 14', team1Code: 'SF', team2Code: 'SEA', team1Percent: 68, team2Percent: 32, time: 'Q2 12\'', league: 'NFL', leagueIcon: '/banners/sports_league/NFL.svg', country: 'USA', team1Logo: 'https://a.espncdn.com/i/teamlogos/nfl/500/sf.png', team2Logo: 'https://a.espncdn.com/i/teamlogos/nfl/500/sea.png', odds: { team1: '-150', tie: '+800', team2: '+130' } }]
 
   return (
     <div 
@@ -1774,14 +1610,13 @@ function HomePageContent() {
           <div className="px-3 py-2 flex items-center gap-2 overflow-x-auto scrollbar-hide border-b border-white/10">
             {[
               { label: 'Home', onClick: () => { setQuickLinksOpen(false); } },
-              { label: 'Sports', onClick: () => { router.push('/sports/football'); setQuickLinksOpen(false); } },
+              { label: 'Sports', onClick: () => { router.push('/sports'); setQuickLinksOpen(false); } },
               { label: 'Live Betting', onClick: () => { window.location.href = '/live-betting'; setQuickLinksOpen(false); } },
               { label: 'Casino', onClick: () => { router.push('/casino'); setQuickLinksOpen(false); } },
               { label: 'Live Casino', onClick: () => { router.push('/casino?tab=live'); setQuickLinksOpen(false); } },
               { label: 'Poker', onClick: () => { router.push('/casino?poker=true'); setQuickLinksOpen(false); } },
               { label: 'VIP Rewards', onClick: () => { router.push('/casino?vip=true'); setQuickLinksOpen(false); } },
-              { label: 'Other', onClick: () => { setQuickLinksOpen(false); } },
-            ].map((item) => (
+              { label: 'Other', onClick: () => { setQuickLinksOpen(false); } }].map((item) => (
               <button
                 key={item.label}
                 onClick={(e) => {
@@ -1852,7 +1687,7 @@ function HomePageContent() {
                 <SidebarMenuItem>
                   <SidebarMenuButton
                     className="h-10 min-w-[80px] px-4 py-2 rounded-small text-sm font-medium justify-center hover:bg-white/5 hover:text-white transition-colors text-white/70 cursor-pointer"
-                    onClick={() => router.push('/sports/football')}
+                    onClick={() => router.push('/sports')}
                   >
                     Sports
                   </SidebarMenuButton>
@@ -1936,7 +1771,33 @@ function HomePageContent() {
           )}
         </div>
         
-        <div className={cn("flex items-center", isMobile ? "gap-2" : "gap-3")} style={{ pointerEvents: 'auto', zIndex: 101, position: 'relative' }}>
+        <div className={cn("flex items-center", isMobile ? "gap-2" : "gap-2")} style={{ pointerEvents: 'auto', zIndex: 101, position: 'relative' }}>
+          {/* Notification Bell - Desktop */}
+          {!isMobile && (
+            <button
+              type="button"
+              aria-label="Notifications"
+              onClick={(e) => {
+                e.preventDefault()
+                e.stopPropagation()
+                setAccountDrawerView('notifications')
+                openAccountDrawer()
+              }}
+              className={cn(
+                "h-9 w-9 rounded-md bg-white/[0.04] border border-white/10 flex items-center justify-center transition-colors",
+                "hover:bg-white/10 hover:border-white/20"
+              )}
+              style={{ pointerEvents: 'auto', zIndex: 101, position: 'relative', cursor: 'pointer' }}
+            >
+              <IconBell className="text-white w-4 h-4" strokeWidth={1.75} />
+            </button>
+          )}
+
+          {/* Separator - Hide on mobile */}
+          {!isMobile && (
+            <div className="h-6 w-px bg-white/15" />
+          )}
+
           {/* VIP Crown Button - Desktop */}
           {!isMobile && (
             <button
@@ -1946,23 +1807,17 @@ function HomePageContent() {
                 openVipDrawer()
               }}
               className={cn(
-                "rounded-full bg-yellow-400/20 border border-yellow-400/30 flex items-center justify-center transition-colors",
-                "hover:bg-yellow-400/30 hover:border-yellow-400/40",
-                "active:bg-gray-500/20",
-                vipDrawerOpen && "bg-yellow-400/30 border-yellow-400/40",
-                "h-8 w-8"
+                "h-9 w-9 rounded-md bg-white/[0.04] border border-white/10 flex items-center justify-center transition-colors",
+                "hover:bg-white/10 hover:border-white/20",
+                "active:bg-white/15",
+                vipDrawerOpen && "bg-white/10 border-white/20"
               )}
               style={{ pointerEvents: 'auto', zIndex: 101, position: 'relative', cursor: 'pointer' }}
             >
               <IconCrown className="text-yellow-400 w-4 h-4" />
             </button>
           )}
-          
-          {/* Separator - Hide on mobile */}
-          {!isMobile && (
-            <div className="h-6 w-px bg-white/20" />
-          )}
-          
+
           {/* Balance and Avatar Button */}
           <Button
             variant="ghost"
@@ -1972,8 +1827,8 @@ function HomePageContent() {
               openAccountDrawer()
             }}
             className={cn(
-              "flex items-center rounded-small transition-colors group bg-white/5 hover:bg-white/10",
-              isMobile ? "gap-1 px-1.5 py-1" : "gap-1.5 px-2 py-1"
+              "flex items-center rounded-md transition-colors group bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/20",
+              isMobile ? "gap-1 px-1.5 py-1" : "gap-1.5 px-2 h-9"
             )}
             style={{ pointerEvents: 'auto', zIndex: 101, position: 'relative', cursor: 'pointer' }}
           >
@@ -2014,16 +1869,14 @@ function HomePageContent() {
             <Button
               variant="ghost"
               onClick={openDepositDrawer}
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-small transition-colors group bg-white/5 hover:bg-white/10 text-xs font-semibold text-white cursor-pointer"
+              className="flex items-center gap-2 px-3 h-9 rounded-md transition-colors group bg-white/[0.04] hover:bg-white/10 border border-white/10 hover:border-white/20 text-xs font-semibold text-white cursor-pointer"
               style={{ pointerEvents: 'auto', zIndex: 101, position: 'relative', cursor: 'pointer' }}
             >
-              <IconWallet className="w-3.5 h-3.5 text-white" />
+              <IconWallet className="w-4 h-4 text-white" strokeWidth={1.75} />
               <span className="text-white">DEPOSIT</span>
             </Button>
           )}
 
-          {/* Chat Toggle - Desktop only, right of deposit */}
-          {!isMobile && <ChatNavToggle />}
         </div>
       </motion.header>
 
@@ -2055,8 +1908,7 @@ function HomePageContent() {
                   { src: '/banners/casino/casino_banner2.svg', alt: 'Casino Banner 2', href: '' },
                   { src: '/banners/casino/casino_banner 3.svg', alt: 'Casino Banner 3', href: '' },
                   { src: '/banners/casino/casino_banner4.svg', alt: 'Casino Banner 4', href: '' },
-                  { src: '/banners/casino/casino_Banner5.svg', alt: 'Casino Banner 5', href: '' },
-                ]).map((banner, i) => (
+                  { src: '/banners/casino/casino_Banner5.svg', alt: 'Casino Banner 5', href: '' }]).map((banner, i) => (
                   <CarouselItem key={i} className="pl-2 basis-auto flex-shrink-0">
                     <Card 
                       className="border-0 relative overflow-hidden flex-shrink-0 cursor-pointer hover:opacity-90 transition-opacity rounded-xl" 
@@ -2170,7 +2022,7 @@ function HomePageContent() {
           <div className={cn("flex items-center justify-between mb-4", isMobile ? "px-3" : "px-6")}>
             <h2 
               className="text-lg font-semibold text-white cursor-pointer hover:text-white/80 transition-colors"
-              onClick={() => router.push('/sports/football')}
+              onClick={() => router.push('/sports')}
             >
               Top Sports
             </h2>
@@ -2178,7 +2030,7 @@ function HomePageContent() {
               <Button
                 variant="ghost"
                 className="text-white/70 hover:text-white hover:bg-white/5 text-xs px-3 py-1.5 h-auto border border-white/20 rounded-small"
-                onClick={() => router.push('/sports/football')}
+                onClick={() => router.push('/sports')}
               >
                 View All
               </Button>
@@ -2302,8 +2154,7 @@ function HomePageContent() {
                           {[
                             { label: event.team1Code, selection: event.team1, odds: event.odds.team1 },
                             { label: 'Tie', selection: 'Tie', odds: event.odds.tie },
-                            { label: event.team2Code, selection: event.team2, odds: event.odds.team2 },
-                          ].map((btn) => {
+                            { label: event.team2Code, selection: event.team2, odds: event.odds.team2 }].map((btn) => {
                             const selected = isTopSportsBetSelected(event.id, btn.selection)
                             return (
                               <button
@@ -2561,8 +2412,7 @@ function HomePageContent() {
                   'Spinthron',
                   'Twain',
                   'VIG',
-                  'Wingo',
-                ].map((vendor, index) => (
+                  'Wingo'].map((vendor, index) => (
                   <CarouselItem key={vendor} className={cn("pr-0 basis-auto flex-shrink-0", index === 0 ? (isMobile ? "pl-3" : "pl-6") : "pl-2 md:pl-4")}>
                     <button
                       className="group relative bg-gray-100/80 dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-lg px-3 py-2.5 text-xs font-medium text-gray-800 dark:text-white/70 hover:bg-gray-200/80 dark:hover:bg-white/10 hover:text-black dark:hover:text-white transition-all duration-300 whitespace-nowrap overflow-hidden flex items-center gap-2"
@@ -2691,8 +2541,7 @@ function HomePageContent() {
                     { icon: '/banners/partners/vip-rewards.svg', title: 'VIP REWARDS', subtitle: 'LEVEL UP BONUSES, BOOSTS & MORE' },
                     { icon: '/banners/partners/bettingicons-coloured.svg', title: 'BET BIG', subtitle: 'HIGH LIMITS AND RE-BET FUNCTIONALITY' },
                     { icon: '/banners/partners/live-betting.svg', title: 'FASTEST PAYOUTS', subtitle: 'PAYOUTS WITHIN MINUTES' },
-                    { icon: 'lock', title: 'SAFE & SECURE', subtitle: 'TRUSTED & PROTECTED' },
-                  ].map((item, index) => (
+                    { icon: 'lock', title: 'SAFE & SECURE', subtitle: 'TRUSTED & PROTECTED' }].map((item, index) => (
                     <CarouselItem key={index} className={cn("pr-2 basis-auto flex-shrink-0", index === 0 ? "pl-0" : "pl-2")}>
                       <div className="p-3 min-w-[280px] group cursor-pointer">
                         <div className="flex items-center gap-3">
@@ -2820,270 +2669,6 @@ function HomePageContent() {
               </div>
             )}
           </div>
-        </div>
-
-        {/* Activity Section */}
-        <div className={cn("mb-6", isMobile ? "px-3" : "px-6")}>
-          <Separator className="mb-6 bg-white/10" />
-          <h2 className="text-lg font-semibold text-white mb-4">Activity</h2>
-          
-          {/* Tabs - Sub Nav Style */}
-          <div className="mb-4 overflow-x-auto scrollbar-hide" style={{ WebkitOverflowScrolling: 'touch' }}>
-            <div className="bg-white/5 dark:bg-white/5 p-0.5 h-auto gap-1 rounded-3xl border-0 backdrop-blur-xl inline-flex w-max">
-              {['All Bets', 'Jackpot Winners', 'High Rollers', 'Daily Race'].map((tab) => (
-                <button
-                  key={tab}
-                  onClick={() => setActivityTab(tab as 'All Bets' | 'Jackpot Winners' | 'High Rollers' | 'Daily Race')}
-                  className={cn(
-                    "relative px-4 py-1 h-9 text-xs font-medium rounded-2xl transition-all duration-300 whitespace-nowrap flex-shrink-0",
-                    activityTab === tab
-                      ? "text-white"
-                      : "text-white/70 hover:text-white hover:bg-white/5 dark:hover:bg-white/5 bg-transparent"
-                  )}
-                >
-                  {activityTab === tab && (
-                    <motion.div
-                      layoutId="activityTab"
-                      className="absolute inset-0 rounded-2xl -z-10"
-                      style={{ backgroundColor: '#ee3536' }}
-                      initial={false}
-                      transition={{
-                        type: "spring",
-                        stiffness: 400,
-                        damping: 40
-                      }}
-                    />
-                  )}
-                  <span className="relative z-10 whitespace-nowrap">{tab}</span>
-                </button>
-              ))}
-            </div>
-          </div>
-
-          {/* Activity Feed Table or Race Leaderboard */}
-          <Card className="bg-white/5 backdrop-blur-sm border-white/10 rounded-small overflow-hidden">
-            <CardContent className="p-0">
-              <div className="max-h-[500px] overflow-y-auto scrollbar-hide">
-                {activityTab === 'Daily Race' ? (
-                  // Daily Race Table
-                  <div className="bg-[#2d2d2d] dark:bg-[#2d2d2d] border border-white/10 dark:border-white/10 rounded-lg overflow-hidden">
-                    {/* Ends in countdown */}
-                    <div className="px-4 py-3 border-b border-white/10 flex items-center justify-between">
-                      <span className="text-white/70 text-xs">Ends in</span>
-                      <div className="text-sm font-bold text-white flex items-center gap-1 tabular-nums">
-                        <NumberFlow value={raceHours} />
-                        <span className="mx-1">:</span>
-                        <NumberFlow value={raceMinutes} />
-                        <span className="mx-1">:</span>
-                        <NumberFlow value={raceSeconds} />
-                      </div>
-                    </div>
-                    <div className="overflow-x-auto">
-                      <table className="w-full">
-                        <thead>
-                          <tr className="border-b border-white/10">
-                            <th className="text-left py-3 px-4 text-xs font-medium text-white/70">Rank</th>
-                            <th className="text-left py-3 px-4 text-xs font-medium text-white/70">Nickname</th>
-                            <th className="text-right py-3 px-4 text-xs font-medium text-white/70">Wagered</th>
-                            <th className="text-right py-3 px-4 text-xs font-medium text-white/70">Prize</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          {raceLeaderboardData.map((entry) => (
-                            <tr key={entry.rank} className="border-b border-white/10 hover:bg-white/10 transition-colors">
-                              <td className="py-3 px-4">
-                                <div className="flex items-center gap-2">
-                                  {entry.medal === 'gold' && <IconTrophy className="w-5 h-5 text-yellow-400" />}
-                                  {entry.medal === 'silver' && <IconTrophy className="w-5 h-5 text-gray-400" />}
-                                  {entry.medal === 'bronze' && <IconTrophy className="w-5 h-5 text-orange-400" />}
-                                  {!entry.medal && <span className="text-white/70 text-sm">{entry.rank}th</span>}
-                                </div>
-                              </td>
-                              <td className="py-3 px-4 text-white text-sm">{entry.nickname}</td>
-                              <td className="py-3 px-4 text-right text-white text-sm">{entry.wagered}</td>
-                              <td className="py-3 px-4 text-right text-white text-sm font-semibold">{entry.prize}</td>
-                            </tr>
-                          ))}
-                          {/* User's Position Row */}
-                          <tr className="border-t-2 border-white/20 bg-white/5">
-                            <td className="py-3 px-4">
-                              <span className="text-white text-sm font-semibold">{userRacePosition.rank}th</span>
-                            </td>
-                            <td className="py-3 px-4 text-white text-sm font-semibold">{userRacePosition.nickname}</td>
-                            <td className="py-3 px-4 text-right text-white text-sm font-semibold">{userRacePosition.wagered}</td>
-                            <td className="py-3 px-4 text-right text-white text-sm font-semibold">{userRacePosition.prize}</td>
-                          </tr>
-                        </tbody>
-                      </table>
-                    </div>
-                  </div>
-                ) : activityTab === 'Jackpot Winners' ? (
-                  // Jackpot Winners Table
-                  <Table>
-                    <TableHeader>
-                      <TableRow className="border-white/10 hover:bg-transparent">
-                        <TableHead className="text-white/70 font-medium text-xs">Game</TableHead>
-                        <TableHead className="text-white/70 font-medium text-xs">User</TableHead>
-                        <TableHead className="text-white/70 font-medium text-xs">Time</TableHead>
-                        <TableHead className="text-white/70 font-medium text-xs">Jackpot Won</TableHead>
-                      </TableRow>
-                    </TableHeader>
-                    <TableBody>
-                      {jackpotWinnersData.map((winner, index) => (
-                        <TableRow
-                          key={winner.id}
-                          className={cn(
-                            "border-b border-white/10 hover:bg-white/5 transition-colors",
-                            index === 0 && "bg-amber-500/5"
-                          )}
-                        >
-                          <TableCell className="py-3 px-4">
-                            <div className="flex items-center gap-2">
-                              {winner.gameImage ? (
-                                <div className="flex-shrink-0 w-10 h-10 rounded-small overflow-hidden">
-                                  <Image
-                                    src={winner.gameImage}
-                                    alt={winner.game}
-                                    width={40}
-                                    height={40}
-                                    className="w-full h-full object-cover"
-                                    quality={75}
-                                    unoptimized
-                                  />
-                                </div>
-                              ) : (
-                                <IconDeviceGamepad2 className="w-4 h-4 text-white/70" />
-                              )}
-                              <span
-                                className="text-white text-sm truncate max-w-[200px] cursor-pointer hover:text-white/80 transition-colors"
-                                onClick={() => {
-                                  if (winner.gameImage) {
-                                    setSelectedGame({
-                                      title: winner.game,
-                                      image: winner.gameImage
-                                    })
-                                  }
-                                }}
-                              >
-                                {winner.game}
-                              </span>
-                            </div>
-                          </TableCell>
-                          <TableCell className="py-3 px-4">
-                            <span className={cn(
-                              "text-sm",
-                              winner.user === 'Hidden' ? "text-white/50" : "text-white"
-                            )}>
-                              {winner.user}
-                            </span>
-                          </TableCell>
-                          <TableCell className="py-3 px-4">
-                            <span className="text-white/60 text-sm">{winner.time}</span>
-                          </TableCell>
-                          <TableCell className="py-3 px-4">
-                            <div className="flex items-center gap-1.5">
-                              <IconTrophy className="w-3.5 h-3.5 text-amber-400" />
-                              <span className="text-amber-400 text-sm font-semibold">{winner.amount}</span>
-                            </div>
-                          </TableCell>
-                        </TableRow>
-                      ))}
-                    </TableBody>
-                  </Table>
-                ) : (
-                  // Activity Feed Table
-                  <Table>
-                    <TableHeader>
-                      <TableRow className="border-white/10 hover:bg-transparent">
-                        <TableHead className="text-white/70 font-medium text-xs">Game</TableHead>
-                        <TableHead className="text-white/70 font-medium text-xs">User</TableHead>
-                        <TableHead className="text-white/70 font-medium text-xs">Time</TableHead>
-                        <TableHead className="text-white/70 font-medium text-xs">Bet Amount</TableHead>
-                        <TableHead className="text-white/70 font-medium text-xs">Win Amount</TableHead>
-                      </TableRow>
-                    </TableHeader>
-                    <TableBody>
-                    <AnimatePresence mode="popLayout">
-                      {activityFeed.map((activity, index) => {
-                        return (
-                          <motion.tr
-                            key={activity.id}
-                            layout
-                            initial={{ opacity: 0, y: -10 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            exit={{ opacity: 0, y: 10 }}
-                            transition={{ duration: 0.2, ease: "easeOut" }}
-                            className={cn(
-                              "border-b border-white/10 hover:bg-white/5 transition-colors",
-                              index === 0 && "bg-white/5"
-                            )}
-                          >
-                            <TableCell className="py-3 px-4">
-                              <div className="flex items-center gap-2">
-                                {activity.gameImage ? (
-                                  <div className="flex-shrink-0 w-10 h-10 rounded-small overflow-hidden">
-                                    <Image
-                                      src={activity.gameImage}
-                                      alt={activity.event}
-                                      width={40}
-                                      height={40}
-                                      className="w-full h-full object-cover"
-                                      quality={75}
-                                      unoptimized
-                                    />
-                                  </div>
-                                ) : (
-                                  <IconDeviceGamepad2 className="w-4 h-4 text-white/70" />
-                                )}
-                                <span 
-                                  className="text-white text-sm truncate max-w-[200px] cursor-pointer hover:text-white/80 transition-colors"
-                                  onClick={() => {
-                                    if (activity.gameImage) {
-                                      setSelectedGame({
-                                        title: activity.event,
-                                        image: activity.gameImage
-                                      })
-                                    }
-                                  }}
-                                >
-                                  {activity.event}
-                                </span>
-                              </div>
-                            </TableCell>
-                            <TableCell className="py-3 px-4">
-                              <span className={cn(
-                                "text-sm",
-                                activity.user === 'Hidden' ? "text-white/50" : "text-white"
-                              )}>
-                                {activity.user}
-                              </span>
-                            </TableCell>
-                            <TableCell className="py-3 px-4">
-                              <span className="text-white/60 text-sm">{activity.time}</span>
-                            </TableCell>
-                            <TableCell className="py-3 px-4">
-                              <div className="flex items-center gap-1.5">
-                                <IconCoins className="w-3.5 h-3.5 text-green-400" />
-                                <span className="text-white text-sm font-medium">{activity.betAmount}</span>
-                              </div>
-                            </TableCell>
-                            <TableCell className="py-3 px-4">
-                              {activity.winAmount ? (
-                                <span className="text-green-400 text-sm font-medium">{activity.winAmount}</span>
-                              ) : (
-                                <span className="text-white/30 text-sm">-</span>
-                              )}
-                            </TableCell>
-                          </motion.tr>
-                        )
-                      })}
-                    </AnimatePresence>
-                  </TableBody>
-                </Table>
-                )}
-              </div>
-            </CardContent>
-          </Card>
         </div>
 
         {/* Game Launcher - Full Screen Overlay */}
@@ -3341,20 +2926,6 @@ function HomePageContent() {
                   setShowJackpot(false)
                   // Store jackpot winnings — balance will animate when game launcher closes
                   pendingBalanceRef.current += 250000
-                }}
-                onShareToChat={() => {
-                  setShowJackpot(false)
-                  // Store jackpot winnings — balance will animate when game launcher closes
-                  pendingBalanceRef.current += 250000
-                  // Share jackpot win to chat
-                  const chatStore = useChatStore.getState()
-                  chatStore.setIsOpen(true)
-                  chatStore.shareBetToChat([{
-                    eventName: `🎰 JACKPOT WIN on ${selectedGame.title}`,
-                    selection: 'Mega Jackpot',
-                    odds: '💰',
-                    stake: 250000,
-                  }])
                 }}
               />
             </motion.div>

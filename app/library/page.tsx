@@ -47,7 +47,6 @@ import { cn } from '@/lib/utils'
 // hydration the whole page goes blank, so we use lazy safe wrappers.
 import dynamic from 'next/dynamic'
 
-const StreakCounter = dynamic(() => import('@/components/vip/streak-counter').then(m => ({ default: m.StreakCounter })), { ssr: false })
 const CashDropCode = dynamic(() => import('@/components/vip/cash-drop-code').then(m => ({ default: m.CashDropCode })), { ssr: false })
 const ReloadClaim = dynamic(() => import('@/components/vip/reload-claim').then(m => ({ default: m.ReloadClaim })), { ssr: false })
 const BetAndGet = dynamic(() => import('@/components/vip/bet-and-get').then(m => ({ default: m.BetAndGet })), { ssr: false })
@@ -578,7 +577,6 @@ const LIBRARY: ComponentEntry[] = [
         <div className="pt-3 pb-4 px-2">
           <div className="flex items-center gap-1.5 overflow-x-auto scrollbar-hide">
             {[
-              { icon: '/sports_icons/my-feed.svg', label: 'My Feed', active: false },
               { icon: '/sports_icons/soccer.svg', label: 'Soccer', active: true },
               { icon: '/sports_icons/Basketball.svg', label: 'Basketball', active: false },
               { icon: '/sports_icons/football.svg', label: 'Football', active: false },
@@ -1008,43 +1006,6 @@ import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip
 
   // ── VIP Components (Real Imports) ──────────────────────
 
-  {
-    id: 'streak-counter',
-    name: 'Streak Counter',
-    description: 'Weekly login streak tracker with animated day pills, fire emoji, share button, and claimable reward. Uses framer-motion.',
-    category: 'components',
-    tags: ['vip', 'gamification', 'streak', 'reward', 'animation', 'framer-motion'],
-    filePath: 'components/vip/streak-counter.tsx',
-    preview: (
-      <div className="w-full max-w-[340px] mx-auto">
-        <StreakCounter
-          streakDays={25}
-          completedDays={[0, 1, 2, 3]}
-          currentDayIndex={4}
-          canClaimReward={false}
-          rewardAmount={10}
-        />
-      </div>
-    ),
-    codeSnippet: `import { StreakCounter } from '@/components/vip/streak-counter'
-
-<StreakCounter
-  streakDays={25}
-  completedDays={[0, 1, 2, 3]}
-  currentDayIndex={4}
-  canClaimReward={false}
-  rewardAmount={10}
-  onClaimReward={() => console.log('Claimed!')}
-  onShare={() => console.log('Shared!')}
-/>
-
-// Props:
-// streakDays: number — total consecutive days
-// completedDays: number[] — indices of completed days (0=Mon, 6=Sun)
-// currentDayIndex: number — which day is "today"
-// canClaimReward: boolean — shows claim button when all 7 days done
-// rewardAmount: number — dollar amount for weekly reward`,
-  },
   {
     id: 'reload-claim',
     name: 'Reload Claim',

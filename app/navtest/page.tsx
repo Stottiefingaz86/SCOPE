@@ -1,6 +1,5 @@
 'use client'
 import { useRainBalance } from '@/hooks/use-rain-balance'
-import { StreakCounter } from '@/components/vip/streak-counter'
 import { ReloadClaim } from '@/components/vip/reload-claim'
 import { CashDropCode } from '@/components/vip/cash-drop-code'
 import { BetAndGet } from '@/components/vip/bet-and-get'
@@ -115,6 +114,7 @@ import {
   IconBell,
   IconTicket,
   IconClock,
+  IconCoin,
   IconCoins,
   IconDownload,
   IconExternalLink,
@@ -216,7 +216,6 @@ import { InteractiveGridBackground } from '@/components/interactive-grid-backgro
 import { RainBackground } from '@/components/rain-background'
 import { cn } from '@/lib/utils'
 import DynamicIsland from '@/components/dynamic-island'
-import ChatNavToggle from '@/components/chat/chat-nav-toggle'
 import {
   IconButton,
   type IconButtonProps,
@@ -252,8 +251,7 @@ const squareTileImages = [
   '/games/square/game17.png',
   '/games/square/game18.png',
   '/games/square/game20.png',
-  '/games/square/game21.png',
-]
+  '/games/square/game21.png']
 
 // Originals tile images (tall rectangles)
 const originalsTileImages = [
@@ -266,8 +264,7 @@ const originalsTileImages = [
   '/games/originals/limbo.png',
   '/games/originals/wheel.png',
   '/games/originals/hilo.png',
-  '/games/originals/video_poker.png',
-]
+  '/games/originals/video_poker.png']
 
 // Mock game data
 const mostPlayedGames = [
@@ -277,15 +274,13 @@ const mostPlayedGames = [
   { id: 4, title: 'HOOKED ON FISHING', provider: 'Betsoft', tag: 'Hot', image: '/walk/image 4.png' },
   { id: 5, title: 'MEGACRUSH HOLD&WIN', provider: 'Betsoft', tag: 'Early', image: '/walk/image 1.png' },
   { id: 6, title: 'MR MAMMOTH', provider: 'Betsoft', tag: null, image: '/walk/image 2.png' },
-  { id: 7, title: 'ORIGINAL DICE', provider: 'BetOnline', tag: null, image: '/walk/image 3.png' },
-]
+  { id: 7, title: 'ORIGINAL DICE', provider: 'BetOnline', tag: null, image: '/walk/image 3.png' }]
 
 const popularGames = [
   { id: 8, title: 'Gold Nugget™ Rush', provider: 'Betsoft', tag: '+ New', image: '/walk/image 1.png' },
   { id: 9, title: 'Stake the BANK', provider: 'Betsoft', tag: 'Exclusive', image: '/walk/image 2.png' },
   { id: 10, title: 'VIP BLACKJACK', provider: 'Dragon Gaming', tag: '$350 - $500', image: '/walk/image 3.png' },
-  { id: 11, title: 'MEGACRUSH HOLD&WIN', provider: 'Betsoft', tag: 'Early', image: '/walk/image 4.png' },
-]
+  { id: 11, title: 'MEGACRUSH HOLD&WIN', provider: 'Betsoft', tag: 'Early', image: '/walk/image 4.png' }]
 
 const originalsGames = [
   { id: 12, title: 'ORIGINAL PLINKO', provider: 'BetOnline', tag: null, image: '/walk/image 1.png' },
@@ -294,16 +289,14 @@ const originalsGames = [
   { id: 15, title: 'ORIGINAL DIAMONDS', provider: 'BetOnline', tag: null, image: '/walk/image 4.png' },
   { id: 16, title: 'ORIGINAL MINES', provider: 'BetOnline', tag: null, image: '/walk/image 1.png' },
   { id: 17, title: 'ORIGINAL KENO', provider: 'BetOnline', tag: null, image: '/walk/image 2.png' },
-  { id: 18, title: 'ORIGINAL LIMBO', provider: 'BetOnline', tag: '900x', image: '/walk/image 3.png' },
-]
+  { id: 18, title: 'ORIGINAL LIMBO', provider: 'BetOnline', tag: '900x', image: '/walk/image 3.png' }]
 
 const liveCasinoGames = [
   { id: 19, title: 'VIP BLACKJACK', provider: 'Live Dealer', tag: '$350 - $500', image: '/walk/image 1.png' },
   { id: 20, title: 'LIVE BETONLINE ROUETTE', provider: 'Live Dealer', tag: '$25 - $100', image: '/walk/image 2.png' },
   { id: 21, title: 'SUBTITLE TITLE', provider: 'Live Dealer', tag: null, image: '/walk/image 3.png' },
   { id: 22, title: 'AUTO BACCARAT', provider: 'Live Dealer', tag: '$1 - $12.500', image: '/walk/image 4.png' },
-  { id: 23, title: 'LIVE BETONLINE ROUETTE', provider: 'Live Dealer', tag: '$25 - $100', image: '/walk/image 1.png' },
-]
+  { id: 23, title: 'LIVE BETONLINE ROUETTE', provider: 'Live Dealer', tag: '$25 - $100', image: '/walk/image 1.png' }]
 
 function GameTile({ game }: { game: typeof mostPlayedGames[0] }) {
   return (
@@ -701,7 +694,7 @@ function LevelsCarousel() {
       bgColor: 'bg-amber-600/20',
       textColor: 'text-amber-600',
       wager: '$0.00',
-      benefits: ['Daily Cash Race', 'Birthday Rewards', 'Monthly Cash Boost']
+      benefits: ['Daily Cash Race', 'Birthday Rewards']
     },
     {
       name: 'Silver',
@@ -711,7 +704,7 @@ function LevelsCarousel() {
       bgColor: 'bg-gray-400/20',
       textColor: 'text-gray-400',
       wager: '$10K',
-      benefits: ['Daily Cash Race', 'Birthday Rewards', 'Weekly Cash Boost', 'Monthly Cash Boost', 'Level Up Bonuses']
+      benefits: ['Daily Cash Race', 'Birthday Rewards', 'Level Up Bonuses']
     },
     {
       name: 'Gold',
@@ -721,7 +714,7 @@ function LevelsCarousel() {
       bgColor: 'bg-yellow-400/20',
       textColor: 'text-yellow-400',
       wager: '$50K',
-      benefits: ['Daily Cash Race', 'Birthday Rewards', 'Weekly Cash Boost', 'Monthly Cash Boost', 'Level Up Bonuses'],
+      benefits: ['Daily Cash Race', 'Birthday Rewards', 'Level Up Bonuses'],
       isActive: true
     },
     {
@@ -732,7 +725,7 @@ function LevelsCarousel() {
       bgColor: 'bg-cyan-400/20',
       textColor: 'text-cyan-400',
       wager: '$100K',
-      benefits: ['Daily Cash Race', 'Birthday Rewards', 'Weekly Cash Boost', 'Monthly Cash Boost', 'Level Up Bonuses']
+      benefits: ['Daily Cash Race', 'Birthday Rewards', 'Level Up Bonuses']
     },
     {
       name: 'Platinum II',
@@ -742,7 +735,7 @@ function LevelsCarousel() {
       bgColor: 'bg-cyan-400/20',
       textColor: 'text-cyan-400',
       wager: '$250K',
-      benefits: ['Daily Cash Race', 'Birthday Rewards', 'Weekly Cash Boost', 'Monthly Cash Boost', 'Level Up Bonuses']
+      benefits: ['Daily Cash Race', 'Birthday Rewards', 'Level Up Bonuses']
     },
     {
       name: 'Platinum III',
@@ -752,7 +745,7 @@ function LevelsCarousel() {
       bgColor: 'bg-cyan-400/20',
       textColor: 'text-cyan-400',
       wager: '$500K',
-      benefits: ['Daily Cash Race', 'Birthday Rewards', 'Weekly Cash Boost', 'Monthly Cash Boost', 'Level Up Bonuses']
+      benefits: ['Daily Cash Race', 'Birthday Rewards', 'Level Up Bonuses']
     },
     {
       name: 'Diamond I',
@@ -762,7 +755,7 @@ function LevelsCarousel() {
       bgColor: 'bg-blue-400/20',
       textColor: 'text-blue-400',
       wager: '$750K',
-      benefits: ['Daily Cash Race', 'Birthday Rewards', 'Weekly Cash Boost', 'Monthly Cash Boost', 'Level Up Bonuses', 'Exclusive Events']
+      benefits: ['Daily Cash Race', 'Birthday Rewards', 'Level Up Bonuses', 'Exclusive Events']
     },
     {
       name: 'Diamond II',
@@ -772,7 +765,7 @@ function LevelsCarousel() {
       bgColor: 'bg-blue-400/20',
       textColor: 'text-blue-400',
       wager: '$1M',
-      benefits: ['Daily Cash Race', 'Birthday Rewards', 'Weekly Cash Boost', 'Monthly Cash Boost', 'Level Up Bonuses', 'Exclusive Events']
+      benefits: ['Daily Cash Race', 'Birthday Rewards', 'Level Up Bonuses', 'Exclusive Events']
     },
     {
       name: 'Diamond III',
@@ -782,7 +775,7 @@ function LevelsCarousel() {
       bgColor: 'bg-blue-400/20',
       textColor: 'text-blue-400',
       wager: '$1.5M',
-      benefits: ['Daily Cash Race', 'Birthday Rewards', 'Weekly Cash Boost', 'Monthly Cash Boost', 'Level Up Bonuses', 'Exclusive Events']
+      benefits: ['Daily Cash Race', 'Birthday Rewards', 'Level Up Bonuses', 'Exclusive Events']
     },
     {
       name: 'Elite I',
@@ -792,7 +785,7 @@ function LevelsCarousel() {
       bgColor: 'bg-purple-400/20',
       textColor: 'text-purple-400',
       wager: '$2M',
-      benefits: ['Daily Cash Race', 'Birthday Rewards', 'Weekly Cash Boost', 'Monthly Cash Boost', 'Level Up Bonuses', 'Exclusive Events', 'Personal Account Manager']
+      benefits: ['Daily Cash Race', 'Birthday Rewards', 'Level Up Bonuses', 'Exclusive Events', 'Personal Account Manager']
     },
     {
       name: 'Elite II',
@@ -802,7 +795,7 @@ function LevelsCarousel() {
       bgColor: 'bg-purple-400/20',
       textColor: 'text-purple-400',
       wager: '$2.5M',
-      benefits: ['Daily Cash Race', 'Birthday Rewards', 'Weekly Cash Boost', 'Monthly Cash Boost', 'Level Up Bonuses', 'Exclusive Events', 'Personal Account Manager']
+      benefits: ['Daily Cash Race', 'Birthday Rewards', 'Level Up Bonuses', 'Exclusive Events', 'Personal Account Manager']
     },
     {
       name: 'Elite III',
@@ -812,7 +805,7 @@ function LevelsCarousel() {
       bgColor: 'bg-purple-400/20',
       textColor: 'text-purple-400',
       wager: '$3M',
-      benefits: ['Daily Cash Race', 'Birthday Rewards', 'Weekly Cash Boost', 'Monthly Cash Boost', 'Level Up Bonuses', 'Exclusive Events', 'Personal Account Manager']
+      benefits: ['Daily Cash Race', 'Birthday Rewards', 'Level Up Bonuses', 'Exclusive Events', 'Personal Account Manager']
     },
     {
       name: 'Black I',
@@ -822,7 +815,7 @@ function LevelsCarousel() {
       bgColor: 'bg-slate-400/20',
       textColor: 'text-slate-400',
       wager: '$3.5M',
-      benefits: ['Daily Cash Race', 'Birthday Rewards', 'Weekly Cash Boost', 'Monthly Cash Boost', 'Level Up Bonuses', 'Exclusive Events', 'Personal Account Manager', 'VIP Concierge']
+      benefits: ['Daily Cash Race', 'Birthday Rewards', 'Level Up Bonuses', 'Exclusive Events', 'Personal Account Manager', 'VIP Concierge']
     },
     {
       name: 'Black II',
@@ -832,7 +825,7 @@ function LevelsCarousel() {
       bgColor: 'bg-slate-400/20',
       textColor: 'text-slate-400',
       wager: '$4M',
-      benefits: ['Daily Cash Race', 'Birthday Rewards', 'Weekly Cash Boost', 'Monthly Cash Boost', 'Level Up Bonuses', 'Exclusive Events', 'Personal Account Manager', 'VIP Concierge']
+      benefits: ['Daily Cash Race', 'Birthday Rewards', 'Level Up Bonuses', 'Exclusive Events', 'Personal Account Manager', 'VIP Concierge']
     },
     {
       name: 'Black III',
@@ -842,7 +835,7 @@ function LevelsCarousel() {
       bgColor: 'bg-slate-400/20',
       textColor: 'text-slate-400',
       wager: '$5M',
-      benefits: ['Daily Cash Race', 'Birthday Rewards', 'Weekly Cash Boost', 'Monthly Cash Boost', 'Level Up Bonuses', 'Exclusive Events', 'Personal Account Manager', 'VIP Concierge']
+      benefits: ['Daily Cash Race', 'Birthday Rewards', 'Level Up Bonuses', 'Exclusive Events', 'Personal Account Manager', 'VIP Concierge']
     },
     {
       name: 'Obsidian I',
@@ -852,7 +845,7 @@ function LevelsCarousel() {
       bgColor: 'bg-violet-400/20',
       textColor: 'text-violet-400',
       wager: '$6M',
-      benefits: ['Daily Cash Race', 'Birthday Rewards', 'Weekly Cash Boost', 'Monthly Cash Boost', 'Level Up Bonuses', 'Exclusive Events', 'Personal Account Manager', 'VIP Concierge', 'Private Events']
+      benefits: ['Daily Cash Race', 'Birthday Rewards', 'Level Up Bonuses', 'Exclusive Events', 'Personal Account Manager', 'VIP Concierge', 'Private Events']
     },
     {
       name: 'Obsidian II',
@@ -862,7 +855,7 @@ function LevelsCarousel() {
       bgColor: 'bg-violet-400/20',
       textColor: 'text-violet-400',
       wager: '$7.5M',
-      benefits: ['Daily Cash Race', 'Birthday Rewards', 'Weekly Cash Boost', 'Monthly Cash Boost', 'Level Up Bonuses', 'Exclusive Events', 'Personal Account Manager', 'VIP Concierge', 'Private Events']
+      benefits: ['Daily Cash Race', 'Birthday Rewards', 'Level Up Bonuses', 'Exclusive Events', 'Personal Account Manager', 'VIP Concierge', 'Private Events']
     },
     {
       name: 'Obsidian III',
@@ -872,7 +865,7 @@ function LevelsCarousel() {
       bgColor: 'bg-violet-400/20',
       textColor: 'text-violet-400',
       wager: '$10M',
-      benefits: ['Daily Cash Race', 'Birthday Rewards', 'Weekly Cash Boost', 'Monthly Cash Boost', 'Level Up Bonuses', 'Exclusive Events', 'Personal Account Manager', 'VIP Concierge', 'Private Events']
+      benefits: ['Daily Cash Race', 'Birthday Rewards', 'Level Up Bonuses', 'Exclusive Events', 'Personal Account Manager', 'VIP Concierge', 'Private Events']
     }
   ]
 
@@ -1255,8 +1248,7 @@ function CashRacesPage({ brandPrimary, setVipDrawerOpen, setShowVipRewards, setV
     { rank: 7, nickname: 'Hidden', betMade: '$4,503.05', prize: '5%' },
     { rank: 8, nickname: 'Hidden', betMade: '$4,163.80', prize: '3%' },
     { rank: 9, nickname: 'Hidden', betMade: '$3,123.05', prize: '2%' },
-    { rank: 10, nickname: 'Hidden', betMade: '$2,305.07', prize: '1%' },
-  ]
+    { rank: 10, nickname: 'Hidden', betMade: '$2,305.07', prize: '1%' }]
   
   // User's position data
   const userPosition = {
@@ -1283,8 +1275,7 @@ function CashRacesPage({ brandPrimary, setVipDrawerOpen, setShowVipRewards, setV
               { src: '/banners/casino/casino_banner2.svg', alt: 'Casino Banner 2' },
               { src: '/banners/casino/casino_banner 3.svg', alt: 'Casino Banner 3' },
               { src: '/banners/casino/casino_banner4.svg', alt: 'Casino Banner 4' },
-              { src: '/banners/casino/casino_Banner5.svg', alt: 'Casino Banner 5' },
-            ].map((banner, index) => (
+              { src: '/banners/casino/casino_Banner5.svg', alt: 'Casino Banner 5' }].map((banner, index) => (
               <CarouselItem key={index} className={`${index === 0 ? 'pl-0' : 'pl-2 md:pl-4'} basis-auto flex-shrink-0`}>
                 <Card className="border-0 relative overflow-hidden flex-shrink-0 cursor-pointer hover:opacity-90 transition-opacity rounded-small" style={{ width: '340px', height: '164px' }}>
                   <Image
@@ -1534,8 +1525,7 @@ function PromosPage({ brandPrimary, setVipDrawerOpen, setShowVipRewards, setVipA
     { id: '5', title: '50 Free Spins', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod temp.' },
     { id: '6', title: 'Tittle', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod temp.' },
     { id: '7', title: 'Tittle', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod temp.' },
-    { id: '8', title: 'Tittle', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod temp.' },
-  ]
+    { id: '8', title: 'Tittle', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod temp.' }]
 
   return (
     <SidebarInset className="bg-[#1a1a1a] text-white">
@@ -1554,8 +1544,7 @@ function PromosPage({ brandPrimary, setVipDrawerOpen, setShowVipRewards, setVipA
               { src: '/banners/casino/casino_banner2.svg', alt: 'Casino Banner 2' },
               { src: '/banners/casino/casino_banner 3.svg', alt: 'Casino Banner 3' },
               { src: '/banners/casino/casino_banner4.svg', alt: 'Casino Banner 4' },
-              { src: '/banners/casino/casino_Banner5.svg', alt: 'Casino Banner 5' },
-            ].map((banner, index) => (
+              { src: '/banners/casino/casino_Banner5.svg', alt: 'Casino Banner 5' }].map((banner, index) => (
               <CarouselItem key={index} className={`${index === 0 ? 'pl-0' : 'pl-2 md:pl-4'} basis-auto flex-shrink-0`}>
                 <Card className="border-0 relative overflow-hidden flex-shrink-0 cursor-pointer hover:opacity-90 transition-opacity rounded-small" style={{ width: '340px', height: '164px' }}>
                   <Image
@@ -1676,8 +1665,7 @@ function MyBonusPage({ brandPrimary, setShowVipRewards }: { brandPrimary: string
     { id: '7', code: 'No Promo Code', amount: '$5.00', rollover: '$0.00', date: '11/04/2014', status: 'EXPIRED', statusColor: 'bg-orange-500' },
     { id: '8', code: 'Sports2025', amount: '$10.00', rollover: '$8.00', date: '11/04/2014', status: 'CANCELLED', statusColor: 'bg-gray-400' },
     { id: '9', code: '1000Happy', amount: '$4.00', rollover: '$0.00', date: '11/04/2014', status: 'COMPLETE', statusColor: 'bg-blue-500' },
-    { id: '10', code: '1000Happy', amount: '$4.00', rollover: '$0.00', date: '11/04/2014', status: 'COMPLETE', statusColor: 'bg-blue-500' },
-  ])
+    { id: '10', code: '1000Happy', amount: '$4.00', rollover: '$0.00', date: '11/04/2014', status: 'COMPLETE', statusColor: 'bg-blue-500' }])
 
   // Casino Bonus data
   const [casinoBonusPage, setCasinoBonusPage] = useState(0)
@@ -1695,8 +1683,7 @@ function MyBonusPage({ brandPrimary, setShowVipRewards }: { brandPrimary: string
     { id: 'c10', name: 'Mystery Game', action: 'PICK A GAME', code: '453339004567', bonusFunds: '$5.00', expiryDate: 'Aug 20, 2024', rollover: '$364.76/$500.00', freeSpins: 200, initialBonusAmount: '$5.00', lockedCashFund: '$0.00', awardedDate: 'Nov 01, 2024', availableOn: 'Select a game to apply the bonus.' },
     { id: 'c11', name: 'Mystery Game', action: 'PICK A GAME', code: '453339004567', bonusFunds: '$5.00', expiryDate: 'Aug 20, 2024', rollover: '$364.76/$500.00', freeSpins: 200, initialBonusAmount: '$5.00', lockedCashFund: '$0.00', awardedDate: 'Nov 15, 2024', availableOn: 'Select a game to apply the bonus.' },
     { id: 'c12', name: 'Roulette Bonus', action: 'PLAY NOW', code: '453339004567', bonusFunds: '$30.00', expiryDate: 'Dec 01, 2024', rollover: '$0.00/$150.00', freeSpins: 0, initialBonusAmount: '$30.00', lockedCashFund: '$0.00', awardedDate: 'Dec 01, 2024', availableOn: 'European Roulette' },
-    { id: 'c13', name: 'Mystery Game', action: 'PICK A GAME', code: '453339004567', bonusFunds: '$5.00', expiryDate: 'Aug 20, 2024', rollover: '$364.76/$500.00', freeSpins: 200, initialBonusAmount: '$5.00', lockedCashFund: '$0.00', awardedDate: 'Dec 15, 2024', availableOn: 'Select a game to apply the bonus.' },
-  ]
+    { id: 'c13', name: 'Mystery Game', action: 'PICK A GAME', code: '453339004567', bonusFunds: '$5.00', expiryDate: 'Aug 20, 2024', rollover: '$364.76/$500.00', freeSpins: 200, initialBonusAmount: '$5.00', lockedCashFund: '$0.00', awardedDate: 'Dec 15, 2024', availableOn: 'Select a game to apply the bonus.' }]
   const casinoBonusTotalPages = Math.ceil(casinoBonuses.length / casinoBonusRowsPerPage)
   const casinoBonusPaginated = casinoBonuses.slice(casinoBonusPage * casinoBonusRowsPerPage, (casinoBonusPage + 1) * casinoBonusRowsPerPage)
 
@@ -1828,8 +1815,7 @@ function MyBonusPage({ brandPrimary, setShowVipRewards }: { brandPrimary: string
               { src: '/banners/casino/casino_banner2.svg', alt: 'Casino Banner 2' },
               { src: '/banners/casino/casino_banner 3.svg', alt: 'Casino Banner 3' },
               { src: '/banners/casino/casino_banner4.svg', alt: 'Casino Banner 4' },
-              { src: '/banners/casino/casino_Banner5.svg', alt: 'Casino Banner 5' },
-            ].map((banner, index) => (
+              { src: '/banners/casino/casino_Banner5.svg', alt: 'Casino Banner 5' }].map((banner, index) => (
               <CarouselItem key={index} className={`${index === 0 ? 'pl-0' : 'pl-2 md:pl-4'} basis-auto flex-shrink-0`}>
                 <Card className="border-0 relative overflow-hidden flex-shrink-0 cursor-pointer hover:opacity-90 transition-opacity rounded-small" style={{ width: '340px', height: '164px' }}>
                   <Image
@@ -2391,7 +2377,7 @@ function VIPRewardsPage({ brandPrimary, setVipDrawerOpen, setVipActiveTab, setSh
   // Show toast when VIP Rewards page is first shown
   useEffect(() => {
     if (!hasShownToast) {
-      setToastMessage('You have a cash boost available')
+      setToastMessage('You have new rewards available')
       setToastAction({
         label: 'View',
         onClick: () => {
@@ -2430,8 +2416,7 @@ function VIPRewardsPage({ brandPrimary, setVipDrawerOpen, setVipActiveTab, setSh
                   { id: 'Promos', label: 'Promos' },
                   { id: 'Cash Races', label: 'Cash Races' },
                   { id: 'Contests', label: 'Contests' },
-                  { id: 'Refer A Friend', label: 'Refer' },
-                ].map((item) => (
+                  { id: 'Refer A Friend', label: 'Refer' }].map((item) => (
                   <TabsTab
                     key={item.id}
                     value={item.id}
@@ -2538,7 +2523,6 @@ function VIPRewardsPage({ brandPrimary, setVipDrawerOpen, setVipActiveTab, setSh
               <div className="flex flex-col md:flex-row gap-3">
                 <TotalRewardsCard />
                 <div className="flex-1 min-w-0">
-                  <StreakCounter />
                 </div>
               </div>
             </div>
@@ -2649,32 +2633,6 @@ function VIPRewardsPage({ brandPrimary, setVipDrawerOpen, setVipActiveTab, setSh
                     </div>
                   </div>
 
-                  <Separator className="bg-white/10 my-6" />
-
-                  {/* Cash Boosts */}
-                  <div>
-                    <div className="flex items-start justify-between mb-2">
-                      <h3 className="text-xl font-semibold text-white">Cash Boosts</h3>
-                    </div>
-                    <p className="text-white/70 text-sm mb-4">
-                      At BetOnline, you can start raking in the rewards as soon as you sign up. Through leveling up, your gaming experience will only get better with bigger rewards and benefits.
-                    </p>
-                    <div className="flex gap-2">
-                      <Button 
-                        variant="ghost" 
-                        className="bg-white/10 text-white hover:bg-white/20"
-                        onClick={() => {
-                          setVipDrawerOpen(true)
-                          setVipActiveTab('VIP Hub')
-                        }}
-                      >
-                        Open
-                      </Button>
-                      <Button variant="ghost" className="bg-white/10 text-white hover:bg-white/20">
-                        Learn More
-                      </Button>
-                    </div>
-                  </div>
                 </CardContent>
               </Card>
             </div>
@@ -2863,8 +2821,7 @@ const sampleBets: Array<{
   { id: 10, amount: 10, selection: 'Manchester City', market: 'Match Winner', odds: '+120', status: null, sport: 'soccer', type: 'single', team1: 'Manchester City', team2: 'Aston Villa', league: 'Premier League', country: 'England', isLive: false, betId: '765735663537744', datePlaced: '25 Oct 2024, 09:00:00am CET' },
   { id: 11, amount: 10, selection: 'Golden State Warriors', market: 'Money Line', odds: '-110', status: null, sport: 'basketball', type: 'single', team1: 'Golden State Warriors', team2: 'LA Lakers', league: 'NBA', country: 'USA', isLive: false, betId: '765735663537745', datePlaced: '25 Oct 2024, 08:30:00am CET' },
   { id: 12, amount: 10, selection: 'New York Yankees', market: 'Run Line -1.5', odds: '+145', status: 'won', wonAmount: 24.50, sport: 'baseball', type: 'single', team1: 'New York Yankees', team2: 'Houston Astros', league: 'MLB', country: 'USA', isLive: false, finalScore: { team1: 7, team2: 3 }, betId: '765735663537746', datePlaced: '24 Oct 2024, 07:00:00pm CET' },
-  { id: 13, amount: 10, selection: 'Kansas City Chiefs', market: 'Point Spread -3.5', odds: '-105', status: 'lost', sport: 'football', type: 'single', team1: 'Kansas City Chiefs', team2: 'Buffalo Bills', league: 'NFL', country: 'USA', isLive: false, finalScore: { team1: 20, team2: 27 }, betId: '765735663537747', datePlaced: '24 Oct 2024, 06:00:00pm CET' },
-]
+  { id: 13, amount: 10, selection: 'Kansas City Chiefs', market: 'Point Spread -3.5', odds: '-105', status: 'lost', sport: 'football', type: 'single', team1: 'Kansas City Chiefs', team2: 'Buffalo Bills', league: 'NFL', country: 'USA', isLive: false, finalScore: { team1: 20, team2: 27 }, betId: '765735663537747', datePlaced: '24 Oct 2024, 06:00:00pm CET' }]
 
 const sportIconMap: Record<string, string> = {
   soccer: '/sports_icons/soccer.svg',
@@ -2889,8 +2846,7 @@ function MyBetsContent({ onBack, brandPrimary }: { onBack: () => void; brandPrim
     { key: 'cash_out' as const, label: 'Cash Out', count: sampleBets.filter(b => b.cashOutValue || b.status === 'cashed_out').length },
     { key: 'in_play' as const, label: 'In-Play', count: sampleBets.filter(b => b.isLive && !b.status).length },
     { key: 'pending' as const, label: 'Pending', count: sampleBets.filter(b => !b.status && !b.isLive).length },
-    { key: 'graded' as const, label: 'Graded', count: null },
-  ]
+    { key: 'graded' as const, label: 'Graded', count: null }]
 
   // Filter bets based on active filter
   const filteredBets = sampleBets.filter(bet => {
@@ -3353,8 +3309,7 @@ function SportsPage({ activeTab, onTabChange, onBack, brandPrimary, brandPrimary
     { value: 'Popularity', label: 'Popularity' },
     { value: 'Starting in', label: 'Starting in' },
     { value: 'Live', label: 'Live' },
-    { value: 'Upcoming', label: 'Upcoming' },
-  ]
+    { value: 'Upcoming', label: 'Upcoming' }]
   
   // Sports sidebar menu items
   const sportsFeatures = [
@@ -3363,8 +3318,7 @@ function SportsPage({ activeTab, onTabChange, onBack, brandPrimary, brandPrimary
     { icon: IconWorld, label: 'World Cup Hub', active: false },
     { icon: IconRocket, label: 'Odds Boosters' },
     { icon: IconDice, label: 'Same Game Parlays' },
-    { icon: IconTrophy, label: 'Mega Parlays' },
-  ]
+    { icon: IconTrophy, label: 'Mega Parlays' }]
   
   const sportsCategories = [
     { icon: IconStar, label: 'Favourites' },
@@ -3381,8 +3335,7 @@ function SportsPage({ activeTab, onTabChange, onBack, brandPrimary, brandPrimary
         { label: 'Go to All Soccer' },
         { label: 'Albania', icon: IconFlag2, badge: IconStar, subItems: [
           { label: '1st Division', badge: IconStar },
-          { label: 'Superliga', badge: IconStar },
-        ]},
+          { label: 'Superliga', badge: IconStar }]},
         { label: 'Argentina', icon: IconFlag2 },
         { label: 'Brazil', icon: IconFlag2 },
         { label: 'Denmark', icon: IconFlag2 },
@@ -3402,10 +3355,8 @@ function SportsPage({ activeTab, onTabChange, onBack, brandPrimary, brandPrimary
         { label: 'Vietnam', icon: IconFlag2 },
         { label: 'International', icon: IconWorld },
         { label: 'Zambia', icon: IconFlag2 },
-        { label: 'Zimbabwe', icon: IconFlag2 },
-      ]
-    },
-  ]
+        { label: 'Zimbabwe', icon: IconFlag2 }]
+    }]
   
   const toggleSport = (sport: string) => {
     setExpandedSports(prev => 
@@ -3446,8 +3397,7 @@ function SportsPage({ activeTab, onTabChange, onBack, brandPrimary, brandPrimary
     { id: 8, name: 'Ligue 1', country: 'France', icon: IconTrophy },
     { id: 9, name: 'Championship', country: 'England', icon: IconTrophy },
     { id: 10, name: 'FA Cup', country: 'England', icon: IconTrophy },
-    { id: 11, name: 'League One', country: 'England', icon: IconTrophy },
-  ]
+    { id: 11, name: 'League One', country: 'England', icon: IconTrophy }]
   
   // Sample event data with betting markets
   const liveEvents = [
@@ -3467,8 +3417,7 @@ function SportsPage({ activeTab, onTabChange, onBack, brandPrimary, brandPrimary
         { title: 'Total', options: [{ label: 'O 3.5', odds: '+350' }, { label: 'U 3.5', odds: '+350' }] },
         { title: '1H Moneyline', options: [{ label: 'LIV', odds: '+350' }, { label: 'Tie', odds: '+350' }, { label: 'BOU', odds: '+350' }] },
         { title: '1H Spread', options: [{ label: 'LIV -0.5', odds: '+350' }, { label: 'BOU +0.5', odds: '+350' }] },
-        { title: '1H Total', options: [{ label: 'O 1.5', odds: '+350' }, { label: 'U 1.5', odds: '+350' }] },
-      ]
+        { title: '1H Total', options: [{ label: 'O 1.5', odds: '+350' }, { label: 'U 1.5', odds: '+350' }] }]
     },
     { 
       id: 2, 
@@ -3486,8 +3435,7 @@ function SportsPage({ activeTab, onTabChange, onBack, brandPrimary, brandPrimary
         { title: 'Total', options: [{ label: 'O 2.5', odds: '+350' }, { label: 'U 2.5', odds: '+350' }] },
         { title: '1H Moneyline', options: [{ label: 'ARS', odds: '+350' }, { label: 'Tie', odds: '+350' }, { label: 'CHE', odds: '+350' }] },
         { title: '1H Spread', options: [{ label: 'ARS -0.5', odds: '+350' }, { label: 'CHE +0.5', odds: '+350' }] },
-        { title: '1H Total', options: [{ label: 'O 1.5', odds: '+350' }, { label: 'U 1.5', odds: '+350' }] },
-      ]
+        { title: '1H Total', options: [{ label: 'O 1.5', odds: '+350' }, { label: 'U 1.5', odds: '+350' }] }]
     },
     { 
       id: 3, 
@@ -3505,10 +3453,8 @@ function SportsPage({ activeTab, onTabChange, onBack, brandPrimary, brandPrimary
         { title: 'Total', options: [{ label: 'O 2.5', odds: '+350' }, { label: 'U 2.5', odds: '+350' }] },
         { title: '1H Moneyline', options: [{ label: 'TOT', odds: '+350' }, { label: 'Tie', odds: '+350' }, { label: 'NEW', odds: '+350' }] },
         { title: '1H Spread', options: [{ label: 'TOT -0.5', odds: '+350' }, { label: 'NEW +0.5', odds: '+350' }] },
-        { title: '1H Total', options: [{ label: 'O 1.5', odds: '+350' }, { label: 'U 1.5', odds: '+350' }] },
-      ]
-    },
-  ]
+        { title: '1H Total', options: [{ label: 'O 1.5', odds: '+350' }, { label: 'U 1.5', odds: '+350' }] }]
+    }]
   
   const upcomingEvents = [
     { 
@@ -3524,8 +3470,7 @@ function SportsPage({ activeTab, onTabChange, onBack, brandPrimary, brandPrimary
         { title: 'Total', options: [{ label: 'O 3.5', odds: '+350' }, { label: 'U 3.5', odds: '+350' }] },
         { title: '1H Moneyline', options: [{ label: 'MCI', odds: '+350' }, { label: 'Tie', odds: '+350' }, { label: 'LIV', odds: '+350' }] },
         { title: '1H Spread', options: [{ label: 'MCI -0.5', odds: '+350' }, { label: 'LIV +0.5', odds: '+350' }] },
-        { title: '1H Total', options: [{ label: 'O 1.5', odds: '+350' }, { label: 'U 1.5', odds: '+350' }] },
-      ]
+        { title: '1H Total', options: [{ label: 'O 1.5', odds: '+350' }, { label: 'U 1.5', odds: '+350' }] }]
     },
     { 
       id: 5, 
@@ -3540,8 +3485,7 @@ function SportsPage({ activeTab, onTabChange, onBack, brandPrimary, brandPrimary
         { title: 'Total', options: [{ label: 'O 2.5', odds: '+350' }, { label: 'U 2.5', odds: '+350' }] },
         { title: '1H Moneyline', options: [{ label: 'ARS', odds: '+350' }, { label: 'Tie', odds: '+350' }, { label: 'CHE', odds: '+350' }] },
         { title: '1H Spread', options: [{ label: 'ARS -0.5', odds: '+350' }, { label: 'CHE +0.5', odds: '+350' }] },
-        { title: '1H Total', options: [{ label: 'O 1.5', odds: '+350' }, { label: 'U 1.5', odds: '+350' }] },
-      ]
+        { title: '1H Total', options: [{ label: 'O 1.5', odds: '+350' }, { label: 'U 1.5', odds: '+350' }] }]
     },
     { 
       id: 6, 
@@ -3556,8 +3500,7 @@ function SportsPage({ activeTab, onTabChange, onBack, brandPrimary, brandPrimary
         { title: 'Total', options: [{ label: 'O 2.5', odds: '+350' }, { label: 'U 2.5', odds: '+350' }] },
         { title: '1H Moneyline', options: [{ label: 'TOT', odds: '+350' }, { label: 'Tie', odds: '+350' }, { label: 'NEW', odds: '+350' }] },
         { title: '1H Spread', options: [{ label: 'TOT -0.5', odds: '+350' }, { label: 'NEW +0.5', odds: '+350' }] },
-        { title: '1H Total', options: [{ label: 'O 1.5', odds: '+350' }, { label: 'U 1.5', odds: '+350' }] },
-      ]
+        { title: '1H Total', options: [{ label: 'O 1.5', odds: '+350' }, { label: 'U 1.5', odds: '+350' }] }]
     },
     { 
       id: 7, 
@@ -3572,8 +3515,7 @@ function SportsPage({ activeTab, onTabChange, onBack, brandPrimary, brandPrimary
         { title: 'Total', options: [{ label: 'O 2.5', odds: '+350' }, { label: 'U 2.5', odds: '+350' }] },
         { title: '1H Moneyline', options: [{ label: 'BHA', odds: '+350' }, { label: 'Tie', odds: '+350' }, { label: 'AVL', odds: '+350' }] },
         { title: '1H Spread', options: [{ label: 'BHA -0.5', odds: '+350' }, { label: 'AVL +0.5', odds: '+350' }] },
-        { title: '1H Total', options: [{ label: 'O 1.5', odds: '+350' }, { label: 'U 1.5', odds: '+350' }] },
-      ]
+        { title: '1H Total', options: [{ label: 'O 1.5', odds: '+350' }, { label: 'U 1.5', odds: '+350' }] }]
     },
     { 
       id: 8, 
@@ -3588,10 +3530,8 @@ function SportsPage({ activeTab, onTabChange, onBack, brandPrimary, brandPrimary
         { title: 'Total', options: [{ label: 'O 2.5', odds: '+350' }, { label: 'U 2.5', odds: '+350' }] },
         { title: '1H Moneyline', options: [{ label: 'WHU', odds: '+350' }, { label: 'Tie', odds: '+350' }, { label: 'CRY', odds: '+350' }] },
         { title: '1H Spread', options: [{ label: 'WHU -0.5', odds: '+350' }, { label: 'CRY +0.5', odds: '+350' }] },
-        { title: '1H Total', options: [{ label: 'O 1.5', odds: '+350' }, { label: 'U 1.5', odds: '+350' }] },
-      ]
-    },
-  ]
+        { title: '1H Total', options: [{ label: 'O 1.5', odds: '+350' }, { label: 'U 1.5', odds: '+350' }] }]
+    }]
 
   // Helper function to check if a bet is selected
   const isBetSelected = (eventId: number, marketTitle: string, selection: string) => {
@@ -4042,8 +3982,7 @@ function SportsPage({ activeTab, onTabChange, onBack, brandPrimary, brandPrimary
                 { label: 'Casino', page: 'casino' as const },
                 { label: 'Live Casino', page: 'liveCasino' as const },
                 { label: 'Poker', page: 'poker' as const },
-                { label: 'VIP Rewards', page: 'vipRewards' as const },
-              ].map((item) => {
+                { label: 'VIP Rewards', page: 'vipRewards' as const }].map((item) => {
                 const isCurrentPage = item.page === 'sports'
                 return (
                   <button
@@ -4110,8 +4049,7 @@ function SportsPage({ activeTab, onTabChange, onBack, brandPrimary, brandPrimary
                     { label: 'Esports', href: '/esports' },
                     { label: 'Racebook', href: '/racebook' },
                     { label: 'Contests', href: '/contests' },
-                    { label: 'Virtuals', href: '/virtuals' },
-                  ].map((item) => (
+                    { label: 'Virtuals', href: '/virtuals' }].map((item) => (
                     <a
                       key={item.label}
                       href={item.href}
@@ -4427,8 +4365,7 @@ function SportsPage({ activeTab, onTabChange, onBack, brandPrimary, brandPrimary
                 {([
                   { value: 'dont_accept' as const, label: "Don't accept odds changes" },
                   { value: 'higher' as const, label: 'Accept higher odds' },
-                  { value: 'any' as const, label: 'Accept any odds' },
-                ]).map((option) => (
+                  { value: 'any' as const, label: 'Accept any odds' }]).map((option) => (
                   <button
                     key={option.value}
                     onClick={() => setBetslipOddsSetting(option.value)}
@@ -5432,8 +5369,7 @@ function SportsPage({ activeTab, onTabChange, onBack, brandPrimary, brandPrimary
                     { id: 1, marketName: 'Market Name Here On More Than One Line', time: 'TODAY 10:30PM' },
                     { id: 2, marketName: 'Market Name Here On More Than One Line', time: 'TODAY 10:30PM' },
                     { id: 3, marketName: 'Market Name Here On More Than One Line', time: 'TODAY 10:30PM' },
-                    { id: 4, marketName: 'Market Name Here On More Than One Line', time: 'TODAY 10:30PM' },
-                  ].map((boost, index) => (
+                    { id: 4, marketName: 'Market Name Here On More Than One Line', time: 'TODAY 10:30PM' }].map((boost, index) => (
                     <CarouselItem key={boost.id} className={index === 0 ? "pl-0 pr-0 basis-auto flex-shrink-0" : "pl-2 md:pl-4 basis-auto flex-shrink-0"}>
                       <div className="w-[320px] bg-white/5 border border-white/10 rounded-small p-3 relative overflow-hidden flex-shrink-0" style={{ background: 'linear-gradient(to bottom, rgba(31, 238, 245, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%)' }}>
                         {/* Header: League info and Time */}
@@ -6055,7 +5991,7 @@ function VipDrawerContent({
     const container = vipTabsContainerRef.current
     if (!container) return
 
-    const tabs = ['VIP Hub', 'Cash Boost', 'Bet & Get', 'Reloads', 'Cash Drop']
+    const tabs = ['VIP Hub', 'Bet & Get', 'Reloads', 'Cash Drop']
     const activeIndex = tabs.indexOf(vipActiveTab)
     
     if (activeIndex === -1) return
@@ -6159,7 +6095,7 @@ function VipDrawerContent({
               pointerEvents: 'auto'
             }}
           >
-            {['VIP Hub', 'Cash Boost', 'Bet & Get', 'Reloads', 'Cash Drop'].map((tab, index) => (
+            {['VIP Hub', 'Bet & Get', 'Reloads', 'Cash Drop'].map((tab, index) => (
               <button
                 key={tab}
                 onClick={() => setVipActiveTab(tab)}
@@ -6204,7 +6140,6 @@ function VipDrawerContent({
             </Card>
             
             <div>
-              <StreakCounter />
             </div>
             {/* Telegram CTA */}
             <a
@@ -6335,18 +6270,6 @@ function VipDrawerContent({
                           <div className="h-4 w-4 rounded-full bg-white/20 flex items-center justify-center">
                             <IconCheck className="h-3 w-3" />
                           </div>
-                          <span>Weekly Cash Boost</span>
-                        </div>
-                        <div className="flex items-center gap-2 text-sm text-white">
-                          <div className="h-4 w-4 rounded-full bg-white/20 flex items-center justify-center">
-                            <IconCheck className="h-3 w-3" />
-                          </div>
-                          <span>Monthly Cash Boost</span>
-                        </div>
-                        <div className="flex items-center gap-2 text-sm text-white">
-                          <div className="h-4 w-4 rounded-full bg-white/20 flex items-center justify-center">
-                            <IconCheck className="h-3 w-3" />
-                          </div>
                           <span>Level Up Bonuses</span>
                         </div>
                       </div>
@@ -6382,18 +6305,6 @@ function VipDrawerContent({
                           <div className="h-4 w-4 rounded-full bg-white/20 flex items-center justify-center">
                             <IconCheck className="h-3 w-3" />
                           </div>
-                          <span>Weekly Cash Boost</span>
-                        </div>
-                        <div className="flex items-center gap-2 text-sm text-white">
-                          <div className="h-4 w-4 rounded-full bg-white/20 flex items-center justify-center">
-                            <IconCheck className="h-3 w-3" />
-                          </div>
-                          <span>Monthly Cash Boost</span>
-                        </div>
-                        <div className="flex items-center gap-2 text-sm text-white">
-                          <div className="h-4 w-4 rounded-full bg-white/20 flex items-center justify-center">
-                            <IconCheck className="h-3 w-3" />
-                          </div>
                           <span>Level Up Bonuses</span>
                         </div>
                       </div>
@@ -6418,12 +6329,6 @@ function VipDrawerContent({
                             <IconCheck className="h-3 w-3" />
                           </div>
                           <span>All Platinum I - III Benefits</span>
-                        </div>
-                        <div className="flex items-center gap-2 text-sm text-white">
-                          <div className="h-4 w-4 rounded-full bg-white/20 flex items-center justify-center">
-                            <IconCheck className="h-3 w-3" />
-                          </div>
-                          <span>Monthly Cash Boost</span>
                         </div>
                         <div className="flex items-center gap-2 text-sm text-white">
                           <div className="h-4 w-4 rounded-full bg-white/20 flex items-center justify-center">
@@ -6590,128 +6495,6 @@ function VipDrawerContent({
                 </AccordionItem>
               </Accordion>
             </div>
-          </div>
-        )}
-        
-        {vipActiveTab === 'Cash Boost' && (
-          <div className="space-y-3">
-            {boostClaimMessage && (
-              <motion.div
-                initial={{ opacity: 0, y: -10 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -10 }}
-                className="bg-green-500/10 border border-green-500/30 rounded-lg p-4 flex items-center gap-3"
-              >
-                <div className="flex-shrink-0">
-                  <div className="w-10 h-10 rounded-full bg-green-500/20 flex items-center justify-center">
-                    <IconCheck className="w-5 h-5 text-green-400" strokeWidth={2} />
-                  </div>
-                </div>
-                <div className="flex-1">
-                  <div className="text-sm font-semibold text-white">
-                    ${boostClaimMessage.amount.toFixed(2)} have been claimed and added to your balance
-                  </div>
-                </div>
-              </motion.div>
-            )}
-            {claimedBoosts.has('weekly') && claimedBoosts.has('monthly') ? (
-              <Card className="bg-white/3 border-white/5">
-                <CardContent className="p-8">
-                  <div className="flex flex-col items-center justify-center">
-                    <div className="w-20 h-20 rounded-2xl bg-white/3 border border-white/5 flex items-center justify-center mb-6">
-                      <IconCrown className="w-10 h-10 text-white/40" strokeWidth={1.5} />
-                    </div>
-                    <div className="text-center space-y-2">
-                      <p className="text-white/70 text-sm leading-relaxed">
-                        Keep on playing and check back for any cash<br />
-                        boost rewards.
-                      </p>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-            ) : (
-              <>
-                {!claimedBoosts.has('weekly') && (
-                  <div className="group flex items-center gap-4 rounded-xl bg-gradient-to-r from-[#fbbf24]/10 to-[#fbbf24]/5 border border-[#fbbf24]/20 p-4 transition-all">
-                    <div className="flex-shrink-0">
-                      <div className="w-12 h-12 rounded-xl bg-[#fbbf24]/20 flex items-center justify-center">
-                        <IconCoins className="w-6 h-6 text-[#fbbf24]" strokeWidth={1.5} />
-                      </div>
-                    </div>
-                    <div className="flex-1 min-w-0">
-                      <div className="text-lg font-bold text-white">$15.00</div>
-                      <div className="text-xs text-white/40">Weekly Cash Boost</div>
-                    </div>
-                    <Button 
-                      variant="ghost"
-                      className="text-white hover:bg-[#ee3536]/90 bg-[#ee3536] text-xs px-4 py-1.5 h-8 rounded-lg font-semibold border-0"
-                      onClick={() => {
-                        setBoostProcessing('weekly')
-                        setTimeout(() => {
-                          setClaimedBoosts(prev => new Set([...prev, 'weekly']))
-                          setBoostProcessing(null)
-                          setBoostClaimMessage({ amount: 15 })
-                          onBoostClaimed(15)
-                          setTimeout(() => {
-                            setBoostClaimMessage(null)
-                          }, 3000)
-                        }, 1500)
-                      }}
-                      disabled={boostProcessing !== null}
-                    >
-                      {boostProcessing === 'weekly' ? (
-                        <div className="flex items-center gap-2">
-                          <IconLoader2 className="w-3 h-3 animate-spin" />
-                          <span>Processing...</span>
-                        </div>
-                      ) : (
-                        'CLAIM'
-                      )}
-                    </Button>
-                  </div>
-                )}
-                {!claimedBoosts.has('monthly') && (
-                  <div className="group flex items-center gap-4 rounded-xl bg-gradient-to-r from-[#fbbf24]/10 to-[#fbbf24]/5 border border-[#fbbf24]/20 p-4 transition-all">
-                    <div className="flex-shrink-0">
-                      <div className="w-12 h-12 rounded-xl bg-[#fbbf24]/20 flex items-center justify-center">
-                        <IconCoins className="w-6 h-6 text-[#fbbf24]" strokeWidth={1.5} />
-                      </div>
-                    </div>
-                    <div className="flex-1 min-w-0">
-                      <div className="text-lg font-bold text-white">$20.00</div>
-                      <div className="text-xs text-white/40">Monthly Cash Boost</div>
-                    </div>
-                    <Button 
-                      variant="ghost"
-                      className="text-white hover:bg-[#ee3536]/90 bg-[#ee3536] text-xs px-4 py-1.5 h-8 rounded-lg font-semibold border-0"
-                      onClick={() => {
-                        setBoostProcessing('monthly')
-                        setTimeout(() => {
-                          setClaimedBoosts(prev => new Set([...prev, 'monthly']))
-                          setBoostProcessing(null)
-                          setBoostClaimMessage({ amount: 20 })
-                          onBoostClaimed(20)
-                          setTimeout(() => {
-                            setBoostClaimMessage(null)
-                          }, 3000)
-                        }, 1500)
-                      }}
-                      disabled={boostProcessing !== null}
-                    >
-                      {boostProcessing === 'monthly' ? (
-                        <div className="flex items-center gap-2">
-                          <IconLoader2 className="w-3 h-3 animate-spin" />
-                          <span>Processing...</span>
-                        </div>
-                      ) : (
-                        'CLAIM'
-                      )}
-                    </Button>
-                  </div>
-                )}
-              </>
-            )}
           </div>
         )}
         
@@ -6933,7 +6716,7 @@ function NavTestPageContent() {
   }, [depositDrawerOpen])
 
   // Sync URL when VIP Rewards page is shown/hidden
-  const originalPathRef = useRef(typeof window !== 'undefined' ? window.location.pathname : '/sports/football')
+  const originalPathRef = useRef(typeof window !== 'undefined' ? window.location.pathname : '/sports')
   useEffect(() => {
     if (typeof window === 'undefined') return
     if (showVipRewards) {
@@ -6945,7 +6728,7 @@ function NavTestPageContent() {
     } else {
       // Restore previous path when leaving VIP
       if (window.location.pathname === '/vip-rewards') {
-        window.history.replaceState(null, '', originalPathRef.current || '/sports/football')
+        window.history.replaceState(null, '', originalPathRef.current || '/sports')
       }
     }
   }, [showVipRewards])
@@ -7141,8 +6924,7 @@ function NavTestPageContent() {
     { icon: IconTrophy, label: 'Tournaments' },
     { icon: IconCrown, label: 'Loyalty Hub' },
     { icon: IconBuilding, label: 'Banking' },
-    { icon: IconLifebuoy, label: 'Need Help' },
-  ]
+    { icon: IconLifebuoy, label: 'Need Help' }]
 
   const gameFilters = ['For You', 'Bonus Buys', 'Megaways', 'Slots', 'Live', 'Jackpots', 'Early', 'Staff Picks', 'New', 'Exclusive']
 
@@ -7194,8 +6976,7 @@ function NavTestPageContent() {
                   { label: 'Live Casino', onClick: () => { setShowSports(false); setShowVipRewards(false); setActiveSubNav('Live'); setQuickLinksOpen(false); } },
                   { label: 'Poker', onClick: () => { window.location.href = '/casino?poker=true'; setQuickLinksOpen(false); } },
                   { label: 'VIP Rewards', onClick: () => { setShowVipRewards(true); setShowSports(false); setQuickLinksOpen(false); } },
-                  { label: 'Other', onClick: () => { setQuickLinksOpen(false); } },
-                ].map((item) => (
+                  { label: 'Other', onClick: () => { setQuickLinksOpen(false); } }].map((item) => (
                   <button
                     key={item.label}
                     onClick={(e) => {
@@ -7519,7 +7300,33 @@ function NavTestPageContent() {
             "flex items-center",
             isMobile ? "gap-2" : "gap-3"
           )} style={{ pointerEvents: 'auto', zIndex: 101, position: 'relative' }}>
-            {/* VIP Crown Button - After theme toggle on desktop, after balance on mobile */}
+            {/* Notification Bell - Desktop */}
+            {!isMobile && (
+              <button
+                type="button"
+                aria-label="Notifications"
+                onClick={(e) => {
+                  e.preventDefault()
+                  e.stopPropagation()
+                  setAccountDrawerView('notifications')
+                  openAccountDrawer()
+                }}
+                className={cn(
+                  "h-9 w-9 rounded-md bg-white/[0.04] border border-white/10 flex items-center justify-center transition-colors",
+                  "hover:bg-white/10 hover:border-white/20"
+                )}
+                style={{ pointerEvents: 'auto', zIndex: 101, position: 'relative', cursor: 'pointer' }}
+              >
+                <IconBell className="text-white w-4 h-4" strokeWidth={1.75} />
+              </button>
+            )}
+
+            {/* Separator - Hide on mobile */}
+            {!isMobile && (
+              <div className="h-6 w-px bg-white/15" />
+            )}
+
+            {/* VIP Crown Button - Desktop */}
             {!isMobile ? (
               <button
                 onClick={(e) => {
@@ -7529,22 +7336,16 @@ function NavTestPageContent() {
                   openVipDrawer()
                 }}
                 className={cn(
-                  "rounded-full bg-yellow-400/20 border border-yellow-400/30 flex items-center justify-center transition-colors",
-                  "hover:bg-yellow-400/30 hover:border-yellow-400/40",
+                  "h-9 w-9 rounded-md bg-white/[0.04] border border-white/10 flex items-center justify-center transition-colors",
+                  "hover:bg-white/10 hover:border-white/20",
                   "active:bg-gray-500/20",
-                  vipDrawerOpen && "bg-yellow-400/30 border-yellow-400/40",
-                  "h-8 w-8"
+                  vipDrawerOpen && "bg-white/10 border-white/20"
                 )}
                 style={{ pointerEvents: 'auto', zIndex: 101, position: 'relative', cursor: 'pointer' }}
               >
                 <IconCrown className="text-yellow-400 w-4 h-4" />
               </button>
             ) : null}
-            
-            {/* Separator - Hide on mobile */}
-            {!isMobile && (
-              <div className="h-6 w-px bg-white/20" />
-            )}
             
             {/* Balance and Avatar Button */}
             <Button
@@ -7556,12 +7357,12 @@ function NavTestPageContent() {
                 openAccountDrawer()
               }}
               className={cn(
-                "flex items-center rounded-small transition-colors group",
+                "flex items-center rounded-md transition-colors group border border-white/10 hover:border-white/20",
                 "bg-white/5 hover:bg-white/10",
                 "active:bg-gray-500/20",
                 accountDrawerOpen && "text-white",
                 accountDrawerOpen && { backgroundColor: brandPrimary },
-                isMobile ? "gap-1 px-1.5 py-1" : "gap-1.5 px-2 py-1"
+                isMobile ? "gap-1 px-1.5 py-1" : "gap-1.5 px-2 h-9"
               )}
               style={{ pointerEvents: 'auto', zIndex: 101, position: 'relative', cursor: 'pointer' }}
             >
@@ -7596,11 +7397,10 @@ function NavTestPageContent() {
                   openVipDrawer()
                 }}
                 className={cn(
-                  "rounded-full bg-yellow-400/20 border border-yellow-400/30 flex items-center justify-center transition-colors",
-                  "hover:bg-yellow-400/30 hover:border-yellow-400/40",
+                  "h-9 w-9 rounded-md bg-white/[0.04] border border-white/10 flex items-center justify-center transition-colors",
+                  "hover:bg-white/10 hover:border-white/20",
                   "active:bg-gray-500/20",
-                  vipDrawerOpen && "bg-yellow-400/30 border-yellow-400/40",
-                  "h-8 w-8"
+                  vipDrawerOpen && "bg-white/10 border-white/20"
                 )}
                 style={{ pointerEvents: 'auto', zIndex: 101, position: 'relative', cursor: 'pointer' }}
               >
@@ -7619,20 +7419,18 @@ function NavTestPageContent() {
                   openDepositDrawer()
                 }}
                 className={cn(
-                  "flex items-center gap-1.5 px-3 py-1.5 rounded-small transition-colors group",
+                  "flex items-center gap-2 px-3 h-9 rounded-md transition-colors group border border-white/10 hover:border-white/20",
                   "bg-white/5 hover:bg-white/10",
                   "active:bg-gray-500/20",
                   "text-xs font-semibold text-white cursor-pointer"
                 )}
                 style={{ pointerEvents: 'auto', zIndex: 101, position: 'relative', cursor: 'pointer' }}
               >
-                <IconWallet className="w-3.5 h-3.5 text-white" />
+                <IconWallet className="w-4 h-4 text-white" strokeWidth={1.75} />
                 <span className="text-white">DEPOSIT</span>
               </Button>
             )}
 
-            {/* Chat Toggle - Desktop only, right of deposit */}
-            {!isMobile && <ChatNavToggle />}
           </div>
         </motion.header>
 
@@ -8486,13 +8284,11 @@ function NavTestPageContent() {
                         { id: 'Contests', icon: IconTrophy, label: 'Contests' },
                         { id: 'Refer A Friend', icon: IconUserPlus, label: 'Refer A Friend' },
                         { type: 'separator' as const },
-                        { id: 'Cash Boost', icon: IconBolt, label: 'Cash Boost', linkTo: 'cashboost' },
                         { id: 'Reloads', icon: IconRefresh, label: 'Reloads', linkTo: 'reloads' },
                         { id: 'Cash Drop', icon: IconParachute, label: 'Cash Drop', linkTo: 'draw' },
                         { id: 'Bet & Get', icon: IconTargetArrow, label: 'Bet & Get', linkTo: 'draw' },
                         { type: 'separator' as const },
-                        { id: 'Get Telegram', icon: IconDownload, label: 'Get Telegram' },
-                      ].map((item: any, index: number) => {
+                        { id: 'Get Telegram', icon: IconDownload, label: 'Get Telegram' }].map((item: any, index: number) => {
                         if (item.type === 'separator') {
                           return (
                             <React.Fragment key={`vip-sep-${index}`}>
@@ -8504,6 +8300,47 @@ function NavTestPageContent() {
                         const Icon = item.icon
                         const itemId = item.id
                         const isActive = vipActiveSidebarItem === itemId
+                        if (itemId === 'Get Telegram') {
+                          return (
+                            <SidebarMenuItem key={itemId}>
+                              <Tooltip>
+                                <TooltipTrigger asChild>
+                                  {sidebarState === 'collapsed' ? (
+                                    <SidebarMenuButton
+                                      asChild
+                                      className="w-full justify-start rounded-small h-auto py-2.5 px-3 text-sm font-medium cursor-pointer text-white/70 hover:text-white hover:bg-white/5"
+                                    >
+                                      <a href="https://t.me/betonline" target="_blank" rel="noopener noreferrer">
+                                        <IconBrandTelegram strokeWidth={1.5} className="w-5 h-5 text-[#229ED9]" />
+                                        <span className="flex-1">Get Telegram</span>
+                                      </a>
+                                    </SidebarMenuButton>
+                                  ) : (
+                                    <a
+                                      href="https://t.me/betonline"
+                                      target="_blank"
+                                      rel="noopener noreferrer"
+                                      className="group flex items-center gap-3 rounded-xl bg-gradient-to-r from-[#229ED9]/10 to-[#229ED9]/5 border border-[#229ED9]/20 hover:border-[#229ED9]/40 px-3 py-2.5 transition-all"
+                                    >
+                                      <div className="w-8 h-8 rounded-lg bg-[#229ED9]/20 flex items-center justify-center flex-shrink-0 group-hover:bg-[#229ED9]/30 transition-colors">
+                                        <IconBrandTelegram className="w-4 h-4 text-[#229ED9]" />
+                                      </div>
+                                      <span className="flex-1 text-sm font-medium text-white">Get Telegram</span>
+                                      <span className="px-2.5 py-1 rounded-md bg-[#229ED9] text-white text-xs font-semibold group-hover:bg-[#1a8bc2] transition-colors">
+                                        Join
+                                      </span>
+                                    </a>
+                                  )}
+                                </TooltipTrigger>
+                                {sidebarState === 'collapsed' && (
+                                  <TooltipContent side="right" className="bg-[#2d2d2d] border-white/10 text-white">
+                                    <p>Get Telegram</p>
+                                  </TooltipContent>
+                                )}
+                              </Tooltip>
+                            </SidebarMenuItem>
+                          )
+                        }
                         return (
                           <SidebarMenuItem key={itemId}>
                             <Tooltip>
@@ -8514,10 +8351,7 @@ function NavTestPageContent() {
                                     e.preventDefault()
                                     e.stopPropagation()
                                     if (item.linkTo) {
-                                      if (item.linkTo === 'cashboost') {
-                                        setVipDrawerOpen(true)
-                                        setVipActiveTab('Cash Boost')
-                                      } else if (item.linkTo === 'reloads') {
+                                      if (item.linkTo === 'reloads') {
                                         setVipDrawerOpen(true)
                                         setVipActiveTab('Reloads')
                                       } else if (item.linkTo === 'draw') {
@@ -8566,8 +8400,7 @@ function NavTestPageContent() {
                       {[
                         { icon: IconCrown, label: 'Loyalty Hub' },
                         { icon: IconBuilding, label: 'Banking' },
-                        { icon: IconLifebuoy, label: 'Need Help' },
-                      ].map((item, index) => {
+                        { icon: IconLifebuoy, label: 'Need Help' }].map((item, index) => {
                         const Icon = item.icon
                         return (
                           <SidebarMenuItem key={`vip-bottom-${index}`}>
@@ -9218,8 +9051,7 @@ function NavTestPageContent() {
                                       'Spinthron',
                                       'Twain',
                                       'VIG',
-                                      'Wingo',
-                                    ].map((vendor) => (
+                                      'Wingo'].map((vendor) => (
                                       <DropdownMenuItem
                                         key={vendor}
                                         onClick={() => {
@@ -9291,8 +9123,7 @@ function NavTestPageContent() {
                                       'Spinthron',
                                       'Twain',
                                       'VIG',
-                                      'Wingo',
-                                    ].map((vendor, index) => (
+                                      'Wingo'].map((vendor, index) => (
                                     <CarouselItem key={vendor} className={cn(
                                       "pr-0 basis-auto flex-shrink-0",
                                       index === 0 ? (isMobile ? "pl-3" : "pl-6") : "pl-2 md:pl-4"
@@ -10127,8 +9958,7 @@ function NavTestPageContent() {
                                       'Spinthron',
                                       'Twain',
                                       'VIG',
-                                      'Wingo',
-                                    ].map((vendor, index) => (
+                                      'Wingo'].map((vendor, index) => (
                                     <CarouselItem key={vendor} className={cn(
                                       "pr-0 basis-auto flex-shrink-0",
                                       index === 0 ? (isMobile ? "pl-3" : "pl-6") : "pl-2 md:pl-4"

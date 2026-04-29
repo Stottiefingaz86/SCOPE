@@ -775,7 +775,8 @@ export default function GlobalBetslip() {
   const [mounted, setMounted] = useState(false)
   useEffect(() => { setMounted(true) }, [])
 
-  // On sports pages, sport pages have their own local betslip — hide the global one entirely.
+  // On sports pages (the hub at /sports and any sub-page like /sports/football),
+  // they have their own local betslip — hide the global one.
   // usePathname() updates on ALL navigations (client-side and browser back/forward),
   // unlike popstate which only fires on browser history navigation.
   const pathname = usePathname()
@@ -783,7 +784,7 @@ export default function GlobalBetslip() {
   const isMaintenancePage = pathname === '/live-betting'
   const isLibraryPage = pathname?.startsWith('/library') ?? false
 
-  // Close global betslip if we navigate to sports (prevent stale open state)
+  // Close global betslip if we navigate to a sports page (prevent stale open state)
   useEffect(() => {
     if (isSportsPage && isOpen) {
       setOpen(false)

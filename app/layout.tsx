@@ -1,10 +1,10 @@
 import type { Metadata, Viewport } from 'next'
 import { Figtree } from 'next/font/google'
 import { ThemeProvider } from 'next-themes'
-import GlobalChatWrapper from '@/components/chat/global-chat-wrapper'
 import GlobalBetslip from '@/components/betslip/global-betslip'
 import { DesignCustomizer } from '@/components/design-customizer'
 import { PreventOverscroll } from '@/components/prevent-overscroll'
+import { WidgetDockManager } from '@/components/sports-tracker-widget'
 import './globals.css'
 
 const figtree = Figtree({
@@ -39,9 +39,8 @@ export default function RootLayout({
       <body style={{ fontFamily: 'var(--font-figtree), sans-serif' }}>
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false} storageKey="theme">
           <PreventOverscroll />
-          <GlobalChatWrapper>
-            {children}
-          </GlobalChatWrapper>
+          {children}
+          <WidgetDockManager />
           <GlobalBetslip />
           <DesignCustomizer />
         </ThemeProvider>
