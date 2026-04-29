@@ -233,6 +233,7 @@ import {
 import { Heart } from 'lucide-react'
 import { UsageBasedPricing } from '@/components/billingsdk/usage-based-pricing'
 import CashierOverlay from '@/components/cashier/cashier-overlay'
+import UspStrip from '@/components/site/usp-strip'
 import {
   FamilyDrawerAnimatedContent,
   FamilyDrawerAnimatedWrapper,
@@ -4729,10 +4730,13 @@ function SportsPage({ activeTab, onTabChange, onBack, brandPrimary, brandPrimary
             </div>
           </div>
           
-          {/* Top Events Section */}
+          {/* USP Section - Single Block with Separators */}
+          <UspStrip className="-mx-6 px-0" />
+
+          {/* Live Now Section */}
           <div className="mb-8">
             <div className="flex items-center justify-between mb-4">
-              <h2 className="text-sm font-semibold text-white/70">TOP EVENTS</h2>
+              <h2 className="text-base font-semibold text-white">Live Now</h2>
               <Button 
                 variant="ghost" 
                 onClick={(e) => {

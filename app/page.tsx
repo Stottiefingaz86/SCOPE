@@ -117,6 +117,7 @@ import { Input } from '@/components/ui/input'
 import DynamicIsland from '@/components/dynamic-island'
 import { JackpotOverlay } from '@/components/casino/jackpot-overlay'
 import CashierOverlay from '@/components/cashier/cashier-overlay'
+import UspStrip from '@/components/site/usp-strip'
 
 // Helper function to get vendor icon path
 const getVendorIconPath = (vendorName: string): string => {
@@ -2018,6 +2019,9 @@ function HomePageContent() {
           </div>
         )}
 
+        {/* USP Section - Single Block with Separators */}
+        <UspStrip />
+
         {/* Top Sports Carousel */}
         <div className="mb-6">
           <div className={cn("flex items-center justify-between mb-4", isMobile ? "px-3" : "px-6")}>
@@ -2025,7 +2029,7 @@ function HomePageContent() {
               className="text-lg font-semibold text-white cursor-pointer hover:text-white/80 transition-colors"
               onClick={() => router.push('/sports')}
             >
-              Top Sports
+              Live Now
             </h2>
             <div className="flex items-center gap-2">
               <Button
@@ -2427,248 +2431,6 @@ function HomePageContent() {
                 ))}
               </CarouselContent>
             </Carousel>
-          </div>
-        </div>
-
-        {/* Why BetOnline Section - Updated with left-aligned text and trust image */}
-        <div className={cn("mb-6", isMobile ? "px-3" : "px-6")}>
-          <h2 className="text-lg font-semibold text-white mb-4">Why BetOnline?</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            {/* Compare Our Competitors Card */}
-            <Card className="group relative bg-gradient-to-br from-[#3a2a1f]/30 to-[#2d1f16]/30 backdrop-blur-sm border-white/10 rounded-small overflow-hidden cursor-pointer transition-all duration-300 hover:border-white/20">
-              <div className="absolute inset-0 bg-gradient-to-br from-[#3a2a1f]/20 to-transparent pointer-events-none" />
-              <CardContent className="p-4 relative z-10">
-                <div className="mb-4">
-                  <div className="text-white font-semibold text-sm mb-0.5 leading-tight">COMPARE OUR</div>
-                  <div className="text-white font-semibold text-sm leading-tight">COMPETITORS</div>
-                </div>
-                <Button
-                  variant="outline"
-                  size="sm"
-                  className="bg-transparent border-white/20 text-white/70 hover:text-white hover:bg-transparent hover:border-white/30 text-xs h-7 px-3"
-                  onClick={() => router.push('/casino')}
-                >
-                  SEE THE DIFFERENCE
-                </Button>
-              </CardContent>
-              {/* Competitors Image */}
-              <div className="absolute right-0 bottom-0 opacity-40 pointer-events-none">
-                <Image
-                  src="/banners/partners/cometitors.png"
-                  alt="Competitors"
-                  width={120}
-                  height={80}
-                  className="object-contain"
-                  quality={100}
-                  unoptimized
-                />
-              </div>
-              <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent transform -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-in-out z-0" />
-            </Card>
-            
-            {/* Trusted By Millions Card */}
-            <Card className="group relative bg-gradient-to-br from-[#1f2a1f]/30 to-[#162116]/30 backdrop-blur-sm border-white/10 rounded-small overflow-hidden cursor-pointer transition-all duration-300 hover:border-white/20">
-              <div className="absolute inset-0 bg-gradient-to-br from-[#1f2a1f]/20 to-transparent pointer-events-none" />
-              <CardContent className="p-4 relative z-10">
-                <div className="mb-4">
-                  <div className="text-white font-semibold text-sm mb-0.5 leading-tight">TRUSTED BY</div>
-                  <div className="text-white font-semibold text-sm leading-tight">MILLIONS</div>
-                </div>
-                <Button
-                  variant="outline"
-                  size="sm"
-                  className="bg-transparent border-white/20 text-white/70 hover:text-white hover:bg-transparent hover:border-white/30 text-xs h-7 px-3"
-                  onClick={() => router.push('/casino')}
-                >
-                  FIND OUT MORE
-                </Button>
-              </CardContent>
-              {/* Trust Image */}
-              <div className="absolute right-4 top-1/2 -translate-y-1/2 opacity-50 pointer-events-none">
-                <Image
-                  src="/banners/partners/trust.png"
-                  alt="Trust"
-                  width={140}
-                  height={90}
-                  className="object-contain"
-                  quality={100}
-                  unoptimized
-                />
-              </div>
-              <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent transform -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-in-out z-0" />
-            </Card>
-            
-            {/* VIP Rewards Program Card */}
-            <Card className="group relative bg-gradient-to-br from-[#2a241f]/30 to-[#1f1a16]/30 backdrop-blur-sm border-white/10 rounded-small overflow-hidden cursor-pointer transition-all duration-300 hover:border-white/20">
-              <div className="absolute inset-0 bg-gradient-to-br from-[#2a241f]/20 to-transparent pointer-events-none" />
-              <CardContent className="p-4 relative z-10">
-                <div className="mb-4">
-                  <div className="text-white font-semibold text-sm mb-0.5 leading-tight">VIP REWARDS</div>
-                  <div className="text-white font-semibold text-sm leading-tight">PROGRAM</div>
-                </div>
-                <Button
-                  variant="outline"
-                  size="sm"
-                  className="bg-transparent border-white/20 text-white/70 hover:text-white hover:bg-transparent hover:border-white/30 text-xs h-7 px-3"
-                  onClick={() => router.push('/casino?vip=true')}
-                >
-                  BECOME A VIP
-                </Button>
-              </CardContent>
-              {/* VIP Why Image */}
-              <div className="absolute right-0 bottom-0 opacity-50 pointer-events-none">
-                <Image
-                  src="/banners/partners/vip_why.png"
-                  alt="VIP Crowns"
-                  width={280}
-                  height={180}
-                  className="object-contain"
-                  quality={100}
-                  unoptimized
-                />
-              </div>
-              <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent transform -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-in-out z-0" />
-            </Card>
-          </div>
-          
-          {/* USP Section - Single Block with Separators */}
-          <div className="mt-6 flex justify-center">
-            {isMobile ? (
-              /* Mobile Carousel */
-              <Carousel className="w-full relative" opts={{ dragFree: true, containScroll: 'trimSnaps', duration: 15 }}>
-                <CarouselContent className="ml-0 mr-0">
-                  {[
-                    { icon: '/banners/partners/crypto.svg', title: 'DEPOSIT WITH CRYPTO', subtitle: 'FAST, EASY & RELIABLE' },
-                    { icon: '/banners/partners/vip-rewards.svg', title: 'VIP REWARDS', subtitle: 'LEVEL UP BONUSES, BOOSTS & MORE' },
-                    { icon: '/banners/partners/bettingicons-coloured.svg', title: 'BET BIG', subtitle: 'HIGH LIMITS AND RE-BET FUNCTIONALITY' },
-                    { icon: '/banners/partners/live-betting.svg', title: 'FASTEST PAYOUTS', subtitle: 'PAYOUTS WITHIN MINUTES' },
-                    { icon: 'lock', title: 'SAFE & SECURE', subtitle: 'TRUSTED & PROTECTED' }].map((item, index) => (
-                    <CarouselItem key={index} className={cn("pr-2 basis-auto flex-shrink-0", index === 0 ? "pl-0" : "pl-2")}>
-                      <div className="p-3 min-w-[280px] group cursor-pointer">
-                        <div className="flex items-center gap-3">
-                          <div className="flex-shrink-0">
-                            {item.icon === 'lock' ? (
-                              <IconLock size={32} className="text-white/60 group-hover:text-[#dc2626] transition-all duration-300" />
-                            ) : (
-                              <Image
-                                src={item.icon}
-                                alt={item.title}
-                                width={32}
-                                height={32}
-                                className="object-contain grayscale group-hover:grayscale-0 transition-all duration-300"
-                                unoptimized
-                              />
-                            )}
-                          </div>
-                          <div className="flex-1 min-w-0">
-                            <h3 className="text-white font-semibold text-xs mb-0.5 uppercase leading-tight">{item.title}</h3>
-                            <p className="text-white/60 text-[10px] uppercase leading-tight">{item.subtitle}</p>
-                          </div>
-                        </div>
-                      </div>
-                    </CarouselItem>
-                  ))}
-                </CarouselContent>
-              </Carousel>
-            ) : (
-              /* Desktop - Single Block with Small Separators */
-              <div className="inline-flex">
-                <div className="grid grid-cols-5">
-                  {/* Deposit With Crypto */}
-                  <div className="p-3 group cursor-pointer">
-                    <div className="flex items-center gap-3">
-                      <div className="flex-shrink-0">
-                        <Image
-                          src="/banners/partners/crypto.svg"
-                          alt="Crypto"
-                          width={32}
-                          height={32}
-                          className="object-contain grayscale group-hover:grayscale-0 transition-all duration-300"
-                          unoptimized
-                        />
-                      </div>
-                      <div>
-                        <h3 className="text-white font-semibold text-xs mb-0.5 uppercase leading-tight">DEPOSIT WITH CRYPTO</h3>
-                        <p className="text-white/60 text-[10px] uppercase leading-tight">FAST, EASY & RELIABLE</p>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* VIP Rewards */}
-                  <div className="p-3 group cursor-pointer">
-                    <div className="flex items-center gap-3">
-                      <div className="flex-shrink-0">
-                        <Image
-                          src="/banners/partners/vip-rewards.svg"
-                          alt="VIP Rewards"
-                          width={32}
-                          height={32}
-                          className="object-contain grayscale group-hover:grayscale-0 transition-all duration-300"
-                          unoptimized
-                        />
-                      </div>
-                      <div>
-                        <h3 className="text-white font-semibold text-xs mb-0.5 uppercase leading-tight">VIP REWARDS</h3>
-                        <p className="text-white/60 text-[10px] uppercase leading-tight">LEVEL UP BONUSES, BOOSTS & MORE</p>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Bet Big */}
-                  <div className="p-3 group cursor-pointer">
-                    <div className="flex items-center gap-3">
-                      <div className="flex-shrink-0">
-                        <Image
-                          src="/banners/partners/bettingicons-coloured.svg"
-                          alt="Bet Big"
-                          width={32}
-                          height={32}
-                          className="object-contain grayscale group-hover:grayscale-0 transition-all duration-300"
-                          unoptimized
-                        />
-                      </div>
-                      <div>
-                        <h3 className="text-white font-semibold text-xs mb-0.5 uppercase leading-tight">BET BIG</h3>
-                        <p className="text-white/60 text-[10px] uppercase leading-tight">HIGH LIMITS AND RE-BET FUNCTIONALITY</p>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Fastest Payouts */}
-                  <div className="p-3 group cursor-pointer">
-                    <div className="flex items-center gap-3">
-                      <div className="flex-shrink-0">
-                        <Image
-                          src="/banners/partners/live-betting.svg"
-                          alt="Fast Payouts"
-                          width={32}
-                          height={32}
-                          className="object-contain grayscale group-hover:grayscale-0 transition-all duration-300"
-                          unoptimized
-                        />
-                      </div>
-                      <div>
-                        <h3 className="text-white font-semibold text-xs mb-0.5 uppercase leading-tight">FASTEST PAYOUTS</h3>
-                        <p className="text-white/60 text-[10px] uppercase leading-tight">PAYOUTS WITHIN MINUTES</p>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Safe & Secure */}
-                  <div className="p-3 group cursor-pointer">
-                    <div className="flex items-center gap-3">
-                      <div className="flex-shrink-0">
-                        <IconLock size={32} className="text-white/60 group-hover:text-[#dc2626] transition-all duration-300" />
-                      </div>
-                      <div>
-                        <h3 className="text-white font-semibold text-xs mb-0.5 uppercase leading-tight">SAFE & SECURE</h3>
-                        <p className="text-white/60 text-[10px] uppercase leading-tight">TRUSTED & PROTECTED</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            )}
           </div>
         </div>
 
