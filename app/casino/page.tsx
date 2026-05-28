@@ -10241,26 +10241,6 @@ function NavTestPageContent() {
                 </div>
               )}
 
-              {/* Jackpot ticker — under banners, outside carousels */}
-              {activeSubNav === 'For You' && !showAllGames && (
-                <div
-                  className={cn(
-                    'relative z-0 w-full min-w-0',
-                    isMobile ? 'px-3 pb-6 pt-1 -mt-2' : 'px-6 pb-8 -mt-4'
-                  )}
-                >
-                  <MustDropDrawer />
-                  <JackpotTickerBar
-                    onNavigateToJackpots={() => {
-                      setActiveSubNav('Jackpots')
-                      setSelectedCategory('Jackpots')
-                      setShowAllGames(true)
-                      window.scrollTo({ top: 0, behavior: 'smooth' })
-                    }}
-                  />
-                </div>
-              )}
-              
               {/* Tab Panels */}
               <div 
                 ref={contentRef}
@@ -10338,9 +10318,6 @@ function NavTestPageContent() {
                               ? 'Jackpot Games'
                               : (selectedVendor || selectedCategory || activeSubNav)}
                         </motion.h2>
-                            {activeSubNav === 'Jackpots' && (
-                              <JackpotSwitch variant="launcher" />
-                            )}
                         </div>
                             
                             {/* Show selected filter */}
@@ -11506,35 +11483,6 @@ function NavTestPageContent() {
                         {/* Game Category Carousels */}
                         <div className="space-y-8 relative" style={{ width: '100%', maxWidth: '100%', boxSizing: 'border-box', minWidth: 0, overflow: 'visible' }}>
 
-                        {/* Jackpots feature block (from BOL) */}
-                        {activeSubNav === 'For You' && (
-                          <JackpotForYouFeatureBlock
-                            isMobile={isMobile}
-                            mustDropAmount={mustDropAmount}
-                            onOpenMustDrop={() => setMustDropDrawerOpen(true)}
-                            onViewAllJackpots={() => {
-                              setActiveSubNav('Jackpots')
-                              setSelectedCategory('Jackpots')
-                              setShowAllGames(true)
-                              window.scrollTo({ top: 0, behavior: 'smooth' })
-                            }}
-                            carouselApi={jackpotsFeatureCarouselApi}
-                            setCarouselApi={setJackpotsFeatureCarouselApi}
-                            canScrollPrev={jackpotsFeatureCanScrollPrev}
-                            canScrollNext={jackpotsFeatureCanScrollNext}
-                            renderGameTile={(gameIndex, i) => (
-                              <LazyGameTile
-                                index={gameIndex}
-                                columnIndex={i}
-                                rowIndex={0}
-                                onTileClick={setSelectedGame}
-                                isMobile={isMobile}
-                                showJackpotNetworkTag
-                              />
-                            )}
-                          />
-                        )}
-
                         {/* New Games Section - Square Tiles */}
                         <div>
                           <div className={cn(
@@ -11741,6 +11689,35 @@ function NavTestPageContent() {
                             </Carousel>
                           </div>
                         </div>
+
+                        {/* Jackpots — below Originals */}
+                        {activeSubNav === 'For You' && (
+                          <JackpotForYouFeatureBlock
+                            isMobile={isMobile}
+                            mustDropAmount={mustDropAmount}
+                            onOpenMustDrop={() => setMustDropDrawerOpen(true)}
+                            onViewAllJackpots={() => {
+                              setActiveSubNav('Jackpots')
+                              setSelectedCategory('Jackpots')
+                              setShowAllGames(true)
+                              window.scrollTo({ top: 0, behavior: 'smooth' })
+                            }}
+                            carouselApi={jackpotsFeatureCarouselApi}
+                            setCarouselApi={setJackpotsFeatureCarouselApi}
+                            canScrollPrev={jackpotsFeatureCanScrollPrev}
+                            canScrollNext={jackpotsFeatureCanScrollNext}
+                            renderGameTile={(gameIndex, i) => (
+                              <LazyGameTile
+                                index={gameIndex}
+                                columnIndex={i}
+                                rowIndex={0}
+                                onTileClick={setSelectedGame}
+                                isMobile={isMobile}
+                                showJackpotNetworkTag
+                              />
+                            )}
+                          />
+                        )}
                         
                         {/* BlackJack Section - Square Tiles */}
                         <div>
@@ -11911,143 +11888,6 @@ function NavTestPageContent() {
                             </div>
                           </div>
                         )}
-                        
-                        {/* Feature Section - Rain Background */}
-                        <div className={cn(
-                          "relative w-full rounded-lg overflow-hidden mb-8",
-                          isMobile ? "mx-3" : "-mx-6"
-                        )}>
-                          <RainBackground 
-                            className="rounded-lg min-h-[400px]"
-                            count={150}
-                            intensity={1}
-                            angle={15}
-                            color="rgba(174, 194, 224, 0.5)"
-                            lightning={true}
-                          >
-                            <div className={cn(
-                              "relative z-10",
-                              isMobile ? "p-8" : "pt-8 pb-8 pr-8 pl-14"
-                            )}>
-                              {/* Tag */}
-                              <div className="mb-2">
-                                <span className="inline-block bg-orange-600/80 text-white text-xs font-semibold px-3 py-1 rounded-small">
-                                  Halloween
-                                </span>
-                              </div>
-                              
-                              {/* Title */}
-                              <h2 className="text-4xl md:text-3xl font-bold text-white mb-3">
-                                HALLOWEEN GAMES
-                              </h2>
-                              
-                              {/* Description */}
-                              <p className="text-white/90 text-sm md:text-base max-w-2xl mb-6">
-                                Get spooky with our collection of Halloween-themed games! Spin the reels and win big with haunted slots and eerie jackpots.
-                              </p>
-                              
-                              {/* Action Button + Arrows */}
-                              <div className="flex items-center justify-between mb-6 pointer-events-auto">
-                                <Button
-                                  variant="ghost"
-                                  className="text-white/70 hover:text-white hover:bg-white/5 text-sm px-6 py-2.5 border border-white/20 rounded-small flex items-center gap-2"
-                                  onClick={() => {
-                                    setSelectedCategory('Halloween')
-                                    setShowAllGames(true)
-                                    setActiveSubNav('For You')
-                                  }}
-                                >
-                                  <IconGhost className="w-4 h-4" />
-                                  All Games
-                                </Button>
-                                {!isMobile && (
-                                  <div className="flex items-center gap-2">
-                                    <Button
-                                      variant="ghost"
-                                      size="icon"
-                                      className="h-8 w-8 rounded-small bg-black/40 backdrop-blur-sm border border-white/20 hover:bg-black/60 hover:border-white/30 text-white disabled:opacity-50 disabled:cursor-not-allowed"
-                                      onClick={() => {
-                                        if (halloweenCarouselApi) {
-                                          const currentIndex = halloweenCarouselApi.selectedScrollSnap()
-                                          const targetIndex = Math.max(0, currentIndex - 2)
-                                          halloweenCarouselApi.scrollTo(targetIndex)
-                                        }
-                                      }}
-                                      disabled={!halloweenCarouselApi || !halloweenCanScrollPrev}
-                                    >
-                                      <IconChevronLeft className="h-4 w-4" strokeWidth={2} />
-                                    </Button>
-                                    <Button
-                                      variant="ghost"
-                                      size="icon"
-                                      className="h-8 w-8 rounded-small bg-black/40 backdrop-blur-sm border border-white/20 hover:bg-black/60 hover:border-white/30 text-white disabled:opacity-50 disabled:cursor-not-allowed"
-                                      onClick={() => {
-                                        if (halloweenCarouselApi) {
-                                          const currentIndex = halloweenCarouselApi.selectedScrollSnap()
-                                          const slideCount = halloweenCarouselApi.scrollSnapList().length
-                                          const targetIndex = Math.min(slideCount - 1, currentIndex + 2)
-                                          halloweenCarouselApi.scrollTo(targetIndex)
-                                        }
-                                      }}
-                                      disabled={!halloweenCarouselApi || !halloweenCanScrollNext}
-                                    >
-                                      <IconChevronRight className="h-4 w-4" strokeWidth={2} />
-                                </Button>
-                                  </div>
-                                )}
-                              </div>
-                              
-                              {/* Game Tiles Carousel */}
-                              <div className="pointer-events-auto -mx-6">
-                                <Carousel setApi={setHalloweenCarouselApi} className="w-full relative" opts={{ dragFree: true, containScroll: 'trimSnaps', duration: 15 }}>
-                                  <CarouselContent className="ml-0 -mr-2 md:-mr-4">
-                                {Array.from({ length: 15 }).map((_, index) => {
-                                  const imageSrc = squareTileImages[index % squareTileImages.length]
-                                  return (
-                                        <CarouselItem key={index} className={cn(
-                                          "pr-0 basis-auto flex-shrink-0",
-                                          index === 0 ? (isMobile ? "pl-3" : "pl-8") : "pl-2 md:pl-3"
-                                        )}>
-                                      <div 
-                                        data-content-item 
-                                        className="w-[160px] h-[160px] rounded-small bg-white/10 cursor-pointer transition-all duration-300 relative overflow-hidden group border border-white/20"
-                                        onMouseEnter={(e) => {
-                                          e.currentTarget.style.backgroundColor = `${getComputedStyle(document.documentElement).getPropertyValue('--ds-primary').trim() || '#ee3536'}33`
-                                        }}
-                                        onMouseLeave={(e) => {
-                                          e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.1)'
-                                        }}
-                                        onClick={() => {
-                                          const halloweenNames = ['Spooky Slots', 'Haunted Mansion', 'Witch\'s Brew', 'Pumpkin Jack', 'Ghostly Reels', 'Trick or Treat']
-                                          setSelectedGame({
-                                            title: halloweenNames[index % halloweenNames.length],
-                                            image: imageSrc,
-                                                provider: getTileVendor(index + 80),
-                                            features: ['Halloween Theme', 'Spooky Bonus Features', 'Special Halloween Promotions']
-                                          })
-                                        }}
-                                      >
-                                        {imageSrc && (
-                                          <Image
-                                            src={imageSrc}
-                                            alt={`Halloween Game ${index + 1}`}
-                                            fill
-                                            className="object-cover group-hover:scale-105 transition-transform duration-300"
-                                            sizes="160px"
-                                          />
-                                        )}
-                                            <GameTagBadge tag={getMetaTag(index + 80)} vendor={getTileVendor(index + 80)} />
-                                        <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300" style={{ background: 'color-mix(in srgb, var(--ds-primary, #ee3536) 10%, transparent)' }} />
-                                      </div>
-                                        </CarouselItem>
-                                  )
-                                })}
-                                  </CarouselContent>
-                                </Carousel>
-                              </div>
-                            </div>
-                          </RainBackground>
-                        </div>
                         
                         {/* Most Popular Section - Square Tiles */}
                         <div>
@@ -12286,6 +12126,143 @@ function NavTestPageContent() {
                               </CarouselContent>
                             </Carousel>
                           </div>
+                        </div>
+
+                        {/* Feature Section - Rain Background (Halloween) */}
+                        <div className={cn(
+                          "relative w-full rounded-lg overflow-hidden mb-8",
+                          isMobile ? "mx-3" : "-mx-6"
+                        )}>
+                          <RainBackground 
+                            className="rounded-lg min-h-[400px]"
+                            count={150}
+                            intensity={1}
+                            angle={15}
+                            color="rgba(174, 194, 224, 0.5)"
+                            lightning={true}
+                          >
+                            <div className={cn(
+                              "relative z-10",
+                              isMobile ? "p-8" : "pt-8 pb-8 pr-8 pl-14"
+                            )}>
+                              {/* Tag */}
+                              <div className="mb-2">
+                                <span className="inline-block bg-orange-600/80 text-white text-xs font-semibold px-3 py-1 rounded-small">
+                                  Halloween
+                                </span>
+                              </div>
+                              
+                              {/* Title */}
+                              <h2 className="text-4xl md:text-3xl font-bold text-white mb-3">
+                                HALLOWEEN GAMES
+                              </h2>
+                              
+                              {/* Description */}
+                              <p className="text-white/90 text-sm md:text-base max-w-2xl mb-6">
+                                Get spooky with our collection of Halloween-themed games! Spin the reels and win big with haunted slots and eerie jackpots.
+                              </p>
+                              
+                              {/* Action Button + Arrows */}
+                              <div className="flex items-center justify-between mb-6 pointer-events-auto">
+                                <Button
+                                  variant="ghost"
+                                  className="text-white/70 hover:text-white hover:bg-white/5 text-sm px-6 py-2.5 border border-white/20 rounded-small flex items-center gap-2"
+                                  onClick={() => {
+                                    setSelectedCategory('Halloween')
+                                    setShowAllGames(true)
+                                    setActiveSubNav('For You')
+                                  }}
+                                >
+                                  <IconGhost className="w-4 h-4" />
+                                  All Games
+                                </Button>
+                                {!isMobile && (
+                                  <div className="flex items-center gap-2">
+                                    <Button
+                                      variant="ghost"
+                                      size="icon"
+                                      className="h-8 w-8 rounded-small bg-black/40 backdrop-blur-sm border border-white/20 hover:bg-black/60 hover:border-white/30 text-white disabled:opacity-50 disabled:cursor-not-allowed"
+                                      onClick={() => {
+                                        if (halloweenCarouselApi) {
+                                          const currentIndex = halloweenCarouselApi.selectedScrollSnap()
+                                          const targetIndex = Math.max(0, currentIndex - 2)
+                                          halloweenCarouselApi.scrollTo(targetIndex)
+                                        }
+                                      }}
+                                      disabled={!halloweenCarouselApi || !halloweenCanScrollPrev}
+                                    >
+                                      <IconChevronLeft className="h-4 w-4" strokeWidth={2} />
+                                    </Button>
+                                    <Button
+                                      variant="ghost"
+                                      size="icon"
+                                      className="h-8 w-8 rounded-small bg-black/40 backdrop-blur-sm border border-white/20 hover:bg-black/60 hover:border-white/30 text-white disabled:opacity-50 disabled:cursor-not-allowed"
+                                      onClick={() => {
+                                        if (halloweenCarouselApi) {
+                                          const currentIndex = halloweenCarouselApi.selectedScrollSnap()
+                                          const slideCount = halloweenCarouselApi.scrollSnapList().length
+                                          const targetIndex = Math.min(slideCount - 1, currentIndex + 2)
+                                          halloweenCarouselApi.scrollTo(targetIndex)
+                                        }
+                                      }}
+                                      disabled={!halloweenCarouselApi || !halloweenCanScrollNext}
+                                    >
+                                      <IconChevronRight className="h-4 w-4" strokeWidth={2} />
+                                </Button>
+                                  </div>
+                                )}
+                              </div>
+                              
+                              {/* Game Tiles Carousel */}
+                              <div className="pointer-events-auto -mx-6">
+                                <Carousel setApi={setHalloweenCarouselApi} className="w-full relative" opts={{ dragFree: true, containScroll: 'trimSnaps', duration: 15 }}>
+                                  <CarouselContent className="ml-0 -mr-2 md:-mr-4">
+                                {Array.from({ length: 15 }).map((_, index) => {
+                                  const imageSrc = squareTileImages[index % squareTileImages.length]
+                                  return (
+                                        <CarouselItem key={index} className={cn(
+                                          "pr-0 basis-auto flex-shrink-0",
+                                          index === 0 ? (isMobile ? "pl-3" : "pl-8") : "pl-2 md:pl-3"
+                                        )}>
+                                      <div 
+                                        data-content-item 
+                                        className="w-[160px] h-[160px] rounded-small bg-white/10 cursor-pointer transition-all duration-300 relative overflow-hidden group border border-white/20"
+                                        onMouseEnter={(e) => {
+                                          e.currentTarget.style.backgroundColor = `${getComputedStyle(document.documentElement).getPropertyValue('--ds-primary').trim() || '#ee3536'}33`
+                                        }}
+                                        onMouseLeave={(e) => {
+                                          e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.1)'
+                                        }}
+                                        onClick={() => {
+                                          const halloweenNames = ['Spooky Slots', 'Haunted Mansion', 'Witch\'s Brew', 'Pumpkin Jack', 'Ghostly Reels', 'Trick or Treat']
+                                          setSelectedGame({
+                                            title: halloweenNames[index % halloweenNames.length],
+                                            image: imageSrc,
+                                                provider: getTileVendor(index + 80),
+                                            features: ['Halloween Theme', 'Spooky Bonus Features', 'Special Halloween Promotions']
+                                          })
+                                        }}
+                                      >
+                                        {imageSrc && (
+                                          <Image
+                                            src={imageSrc}
+                                            alt={`Halloween Game ${index + 1}`}
+                                            fill
+                                            className="object-cover group-hover:scale-105 transition-transform duration-300"
+                                            sizes="160px"
+                                          />
+                                        )}
+                                            <GameTagBadge tag={getMetaTag(index + 80)} vendor={getTileVendor(index + 80)} />
+                                        <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300" style={{ background: 'color-mix(in srgb, var(--ds-primary, #ee3536) 10%, transparent)' }} />
+                                      </div>
+                                        </CarouselItem>
+                                  )
+                                })}
+                                  </CarouselContent>
+                                </Carousel>
+                              </div>
+                            </div>
+                          </RainBackground>
                         </div>
 
                         {/* Crash Games Section - Square Tiles */}
