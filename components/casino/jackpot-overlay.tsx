@@ -207,7 +207,7 @@ function OdometerAmount({ spinning, scale }: { spinning: boolean; scale: number 
 interface JackpotOverlayProps {
   visible: boolean
   onClose: () => void
-  onShareToChat?: () => void
+  onShareToChat: () => void
   gameName?: string
 }
 
@@ -383,23 +383,18 @@ export function JackpotOverlay({ visible, onClose, onShareToChat, gameName = 'Me
               transition={{ duration: 0.4 }}
               className="flex items-center gap-3 mt-1 w-full max-w-xs"
             >
-              {onShareToChat && (
-                <button
-                  onClick={onShareToChat}
-                  className="flex-1 flex items-center justify-center gap-2 px-5 py-3 rounded-lg bg-white text-black font-semibold text-sm hover:bg-white/90 transition-all active:scale-[0.97]"
-                >
-                  <IconShare className="w-4 h-4" />
-                  Share to Chat
-                </button>
-              )}
+              <button
+                onClick={onShareToChat}
+                className="flex-1 flex items-center justify-center gap-2 px-5 py-3 rounded-lg bg-white text-black font-semibold text-sm hover:bg-white/90 transition-all active:scale-[0.97]"
+              >
+                <IconShare className="w-4 h-4" />
+                Share to Chat
+              </button>
               <button
                 onClick={onClose}
-                className={onShareToChat
-                  ? "flex items-center justify-center w-12 h-12 rounded-lg bg-white/[0.06] hover:bg-white/[0.12] border border-white/[0.08] text-white/50 hover:text-white transition-all active:scale-[0.97]"
-                  : "flex-1 flex items-center justify-center gap-2 px-5 py-3 rounded-lg bg-white text-black font-semibold text-sm hover:bg-white/90 transition-all active:scale-[0.97]"
-                }
+                className="flex items-center justify-center w-12 h-12 rounded-lg bg-white/[0.06] hover:bg-white/[0.12] border border-white/[0.08] text-white/50 hover:text-white transition-all active:scale-[0.97]"
               >
-                {onShareToChat ? <IconX className="w-5 h-5" /> : 'Continue'}
+                <IconX className="w-5 h-5" />
               </button>
             </motion.div>
           </motion.div>

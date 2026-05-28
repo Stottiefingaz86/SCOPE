@@ -135,10 +135,12 @@ import {
   JackpotTabTicker,
   JackpotSwitch,
   JackpotTickerBar,
+  JackpotTickingAmount,
   MustDropDrawer,
   useJackpotTicker,
   useJackpotPreviewGameCount,
 } from '@/components/casino/jackpot'
+import { JackpotForYouFeatureBlock } from '@/components/casino/jackpot-for-you-feature-block'
 import { JACKPOT_ELIGIBLE_GAME_LIMIT } from '@/lib/jackpot/constants'
 import { getJackpotNetworkTier, isJackpotNetworkGame } from '@/lib/jackpot/game-network'
 import { useJackpotStore } from '@/lib/store/jackpotStore'
@@ -7668,6 +7670,9 @@ function NavTestPageContent() {
   const [canScrollVipLeft, setCanScrollVipLeft] = useState(false)
   const [canScrollVipRight, setCanScrollVipRight] = useState(false)
   const [currentTime, setCurrentTime] = useState<string>('')
+  const mustDropAmount = useJackpotStore((s) => s.mustDropAmount)
+  const setMustDropDrawerOpen = useJackpotStore((s) => s.setMustDropDrawerOpen)
+
   const [showAllGames, setShowAllGames] = useState(false)
   const [selectedCategory, setSelectedCategory] = useState<string>('')
   const [selectedVendor, setSelectedVendor] = useState<string>('')
@@ -7735,9 +7740,12 @@ function NavTestPageContent() {
   const [forYouBlackjackCanScrollNext, setForYouBlackjackCanScrollNext] = useState(false)
   const [forYouBlackjackCurrentIndex, setForYouBlackjackCurrentIndex] = useState(0)
   
-  const [forYouJackpotsCarouselApi, setForYouJackpotsCarouselApi] = useState<CarouselApi>()
-  const [forYouJackpotsCanScrollPrev, setForYouJackpotsCanScrollPrev] = useState(false)
-  const [forYouJackpotsCanScrollNext, setForYouJackpotsCanScrollNext] = useState(false)
+  const [jackpotsFeatureCarouselApi, setJackpotsFeatureCarouselApi] =
+    useState<CarouselApi>()
+  const [jackpotsFeatureCanScrollPrev, setJackpotsFeatureCanScrollPrev] =
+    useState(false)
+  const [jackpotsFeatureCanScrollNext, setJackpotsFeatureCanScrollNext] =
+    useState(false)
 
   const [forYouSlotsCarouselApi, setForYouSlotsCarouselApi] = useState<CarouselApi>()
   const [forYouSlotsCanScrollPrev, setForYouSlotsCanScrollPrev] = useState(false)
@@ -7875,14 +7883,14 @@ function NavTestPageContent() {
   }, [forYouBlackjackCarouselApi])
   
   useEffect(() => {
-    if (!forYouJackpotsCarouselApi) return
-    setForYouJackpotsCanScrollPrev(forYouJackpotsCarouselApi.canScrollPrev())
-    setForYouJackpotsCanScrollNext(forYouJackpotsCarouselApi.canScrollNext())
-    forYouJackpotsCarouselApi.on('select', () => {
-      setForYouJackpotsCanScrollPrev(forYouJackpotsCarouselApi.canScrollPrev())
-      setForYouJackpotsCanScrollNext(forYouJackpotsCarouselApi.canScrollNext())
+    if (!jackpotsFeatureCarouselApi) return
+    setJackpotsFeatureCanScrollPrev(jackpotsFeatureCarouselApi.canScrollPrev())
+    setJackpotsFeatureCanScrollNext(jackpotsFeatureCarouselApi.canScrollNext())
+    jackpotsFeatureCarouselApi.on('select', () => {
+      setJackpotsFeatureCanScrollPrev(jackpotsFeatureCarouselApi.canScrollPrev())
+      setJackpotsFeatureCanScrollNext(jackpotsFeatureCarouselApi.canScrollNext())
     })
-  }, [forYouJackpotsCarouselApi])
+  }, [jackpotsFeatureCarouselApi])
 
   useEffect(() => {
     if (!forYouSlotsCarouselApi) return
@@ -10266,9 +10274,22 @@ function NavTestPageContent() {
                 )}
                 style={{ width: '100%', maxWidth: '100%', boxSizing: 'border-box', minWidth: 0 }}
               >
-                  <AnimatePresence mode="wait" initial={false}>
+                  <AnimatePresence mode="sync" initial={false}>
                     {showAllGames ? (
-                      <div className="">
+                      <motion.div
+                        key={`all-games-${activeSubNav || selectedCategory || 'grid'}`}
+                        initial={false}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -8 }}
+                        transition={{ duration: 0.2, ease: 'easeOut' }}
+                        className="w-full"
+                        style={{
+                          width: '100%',
+                          maxWidth: '100%',
+                          boxSizing: 'border-box',
+                          minWidth: 0,
+                        }}
+                      >
                         {activeSubNav === 'Jackpots' && (
                           <JackpotTabTicker />
                         )}
@@ -10311,7 +10332,11 @@ function NavTestPageContent() {
                           animate={{ opacity: 1, y: 0 }}
                           transition={{ duration: 0.3, ease: "easeOut" }}
                         >
-                          {activeIconTab === 'favorite' || selectedCategory === 'Favorites' ? 'Favorites' : (selectedVendor || selectedCategory || activeSubNav)}
+                          {activeIconTab === 'favorite' || selectedCategory === 'Favorites'
+                            ? 'Favorites'
+                            : (selectedVendor || selectedCategory || activeSubNav) === 'Jackpots'
+                              ? 'Jackpot Games'
+                              : (selectedVendor || selectedCategory || activeSubNav)}
                         </motion.h2>
                             {activeSubNav === 'Jackpots' && (
                               <JackpotSwitch variant="launcher" />
@@ -10864,7 +10889,7 @@ function NavTestPageContent() {
                           const categoryKey = selectedCategory || activeSubNav
                           const maxCols = 8 // Maximum columns for largest screens
                           const isJackpotsGrid =
-                            activeSubNav === 'Jackpots' && showAllGames && mounted
+                            activeSubNav === 'Jackpots' && showAllGames
                           const gridClassName =
                             'grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 2xl:grid-cols-7 3xl:grid-cols-8 gap-4 px-6'
 
@@ -10970,7 +10995,7 @@ function NavTestPageContent() {
                             </div>
                           )
                         })()}
-                      </div>
+                      </motion.div>
                     ) : activeSubNav === 'Live' ? (
                       <motion.div
                         key="live"
@@ -11481,107 +11506,33 @@ function NavTestPageContent() {
                         {/* Game Category Carousels */}
                         <div className="space-y-8 relative" style={{ width: '100%', maxWidth: '100%', boxSizing: 'border-box', minWidth: 0, overflow: 'visible' }}>
 
-                        {/* Jackpots — same carousel pattern as other For You rows */}
+                        {/* Jackpots feature block (from BOL) */}
                         {activeSubNav === 'For You' && (
-                        <div className={cn(isMobile ? 'pt-5' : 'pt-6')}>
-                          <div
-                            className={cn(
-                              'flex justify-between items-center mb-5 relative z-10',
-                              isMobile ? 'px-3' : 'px-6'
+                          <JackpotForYouFeatureBlock
+                            isMobile={isMobile}
+                            mustDropAmount={mustDropAmount}
+                            onOpenMustDrop={() => setMustDropDrawerOpen(true)}
+                            onViewAllJackpots={() => {
+                              setActiveSubNav('Jackpots')
+                              setSelectedCategory('Jackpots')
+                              setShowAllGames(true)
+                              window.scrollTo({ top: 0, behavior: 'smooth' })
+                            }}
+                            carouselApi={jackpotsFeatureCarouselApi}
+                            setCarouselApi={setJackpotsFeatureCarouselApi}
+                            canScrollPrev={jackpotsFeatureCanScrollPrev}
+                            canScrollNext={jackpotsFeatureCanScrollNext}
+                            renderGameTile={(gameIndex, i) => (
+                              <LazyGameTile
+                                index={gameIndex}
+                                columnIndex={i}
+                                rowIndex={0}
+                                onTileClick={setSelectedGame}
+                                isMobile={isMobile}
+                                showJackpotNetworkTag
+                              />
                             )}
-                            style={{ maxWidth: '100%', width: '100%', overflow: 'visible', boxSizing: 'border-box' }}
-                          >
-                            <div className="flex min-w-0 items-center gap-3 flex-1 min-h-[36px]">
-                              <h2 className="text-lg font-semibold text-black dark:text-white flex-shrink-0 transition-colors duration-300">
-                                Jackpots
-                              </h2>
-                              <JackpotSwitch variant="launcher" />
-                            </div>
-                            <div className="flex items-center gap-2 relative z-10 flex-shrink-0 ml-2" style={{ visibility: 'visible', opacity: 1, display: 'flex', flexShrink: 0, marginLeft: 'auto' }}>
-                            <Button
-                              variant="ghost"
-                              className="text-white/70 dark:text-white/70 text-gray-900 dark:text-white/70 hover:text-white dark:hover:text-white hover:text-black dark:hover:text-white hover:bg-white/5 dark:hover:bg-white/5 text-xs px-3 py-1.5 h-auto border border-white/20 dark:border-white/20 border-gray-300 dark:border-white/20 rounded-small relative z-10 whitespace-nowrap transition-colors duration-300"
-                                style={{ visibility: 'visible', opacity: 1, display: 'inline-flex', flexShrink: 0, whiteSpace: 'nowrap' }}
-                              onClick={() => {
-                                setActiveSubNav('Jackpots')
-                                setSelectedCategory('Jackpots')
-                                setShowAllGames(true)
-                                window.scrollTo({ top: 0, behavior: 'smooth' })
-                              }}
-                            >
-                              View all
-                            </Button>
-                              {!isMobile && (
-                                <>
-                                  <Button
-                                    variant="ghost"
-                                    size="icon"
-                                    className="h-8 w-8 rounded-small bg-[#1a1a1a]/90 backdrop-blur-sm border border-white/20 hover:bg-[#1a1a1a] hover:border-white/30 text-white disabled:opacity-50 disabled:cursor-not-allowed"
-                                    onClick={() => {
-                                      if (forYouJackpotsCarouselApi) {
-                                        const currentIndex = forYouJackpotsCarouselApi.selectedScrollSnap()
-                                        const targetIndex = Math.max(0, currentIndex - 2)
-                                        forYouJackpotsCarouselApi.scrollTo(targetIndex)
-                                      }
-                                    }}
-                                    disabled={!forYouJackpotsCarouselApi || !forYouJackpotsCanScrollPrev}
-                                  >
-                                    <IconChevronLeft className="h-4 w-4" strokeWidth={2} />
-                                  </Button>
-                                  <Button
-                                    variant="ghost"
-                                    size="icon"
-                                    className="h-8 w-8 rounded-small bg-[#1a1a1a]/90 backdrop-blur-sm border border-white/20 hover:bg-[#1a1a1a] hover:border-white/30 text-white disabled:opacity-50 disabled:cursor-not-allowed"
-                                    onClick={() => {
-                                      if (forYouJackpotsCarouselApi) {
-                                        const currentIndex = forYouJackpotsCarouselApi.selectedScrollSnap()
-                                        const slideCount = forYouJackpotsCarouselApi.scrollSnapList().length
-                                        const targetIndex = Math.min(slideCount - 1, currentIndex + 2)
-                                        forYouJackpotsCarouselApi.scrollTo(targetIndex)
-                                      }
-                                    }}
-                                    disabled={!forYouJackpotsCarouselApi || !forYouJackpotsCanScrollNext}
-                                  >
-                                    <IconChevronRight className="h-4 w-4" strokeWidth={2} />
-                                  </Button>
-                                </>
-                              )}
-                            </div>
-                          </div>
-                          <div className="relative" style={{ overflow: 'visible', position: 'relative', width: '100%', maxWidth: '100%', boxSizing: 'border-box', minWidth: 0 }}>
-                            <Carousel setApi={setForYouJackpotsCarouselApi} className="w-full relative" style={{ overflow: 'visible', position: 'relative', width: '100%', maxWidth: '100%', minWidth: 0 }} opts={{ dragFree: true, containScroll: 'trimSnaps', duration: 15 }}>
-                              <CarouselContent className="ml-0 -mr-2 md:-mr-4">
-                                {Array.from({ length: 24 })
-                                  .map((_, i) => i)
-                                  .filter((i) => isJackpotNetworkGame(i))
-                                  .slice(0, 12)
-                                  .map((index, i) => (
-                                    <CarouselItem
-                                      key={`jp-fy-${index}`}
-                                      className={cn(
-                                        'pr-0 basis-auto flex-shrink-0',
-                                        i === 0 ? (isMobile ? 'pl-3' : 'pl-6') : 'pl-2 md:pl-4'
-                                      )}
-                                    >
-                                      <div
-                                        data-content-item
-                                        className="w-[160px] h-[160px] flex-shrink-0"
-                                      >
-                                        <LazyGameTile
-                                          index={index}
-                                          columnIndex={i}
-                                          rowIndex={0}
-                                          onTileClick={setSelectedGame}
-                                          isMobile={isMobile}
-                                          showJackpotNetworkTag
-                                        />
-                                      </div>
-                                    </CarouselItem>
-                                  ))}
-                              </CarouselContent>
-                            </Carousel>
-                          </div>
-                        </div>
+                          />
                         )}
 
                         {/* New Games Section - Square Tiles */}
@@ -13751,6 +13702,22 @@ function NavTestPageContent() {
             if (selectedGame) {
               pendingBalanceRef.current += 250000
             }
+          }}
+          onShareToChat={() => {
+            setShowJackpot(false)
+            if (selectedGame) {
+              pendingBalanceRef.current += 250000
+            }
+            const chatStore = useChatStore.getState()
+            chatStore.setIsOpen(true)
+            chatStore.shareBetToChat([
+              {
+                eventName: `🎰 JACKPOT WIN on ${selectedGame?.title ?? 'Jackpot'}`,
+                selection: 'Mega Jackpot',
+                odds: '💰',
+                stake: 250000,
+              },
+            ])
           }}
         />
 

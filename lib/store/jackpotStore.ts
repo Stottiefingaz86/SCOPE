@@ -78,7 +78,7 @@ export const useJackpotStore = create<JackpotState>()(
       },
     }),
     {
-      name: 'scope-jackpot',
+      name: 'bol-jackpot',
       partialize: (state) => ({ optedIn: state.optedIn }),
     }
   )

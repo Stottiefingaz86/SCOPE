@@ -2687,8 +2687,21 @@ function HomePageContent() {
                 gameName={selectedGame.title}
                 onClose={() => {
                   setShowJackpot(false)
-                  // Store jackpot winnings — balance will animate when game launcher closes
                   pendingBalanceRef.current += 250000
+                }}
+                onShareToChat={() => {
+                  setShowJackpot(false)
+                  pendingBalanceRef.current += 250000
+                  const chatStore = useChatStore.getState()
+                  chatStore.setIsOpen(true)
+                  chatStore.shareBetToChat([
+                    {
+                      eventName: `🎰 JACKPOT WIN on ${selectedGame.title}`,
+                      selection: 'Mega Jackpot',
+                      odds: '💰',
+                      stake: 250000,
+                    },
+                  ])
                 }}
               />
             </motion.div>
